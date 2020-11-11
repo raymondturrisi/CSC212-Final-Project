@@ -9,13 +9,14 @@ class MedianOfMedians
 {
     private:
         std::vector<int> list;
-        int partition (int left, int right, int pivotIdx, int target);
-        int pivot(int left, int right);
-        int partition5(int left, int right);
+        int pivot(int val, int left, int right);
+        void sort(int left, int right);
     public:
-        MedianOfMedians(std::vector<int> list, int target);
-        void reset(std::vector<int> list, int target);
-        int select(int left, int right, int target);
+        MedianOfMedians(std::vector<int> list);//May look into making this a pointer if needed
+        void reset(std::vector<int> list);//If we need to change the list out
+        int select(int left, int right, int target);//Left = start of array, Right = end of array,
+        //Target = index of target (ex. and vector of size 10 would have a target of 4 to find median)
+
 };
 
 
