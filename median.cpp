@@ -68,32 +68,29 @@ int MedianOfMedians::select(int left, int right, int target)
 
 int MedianOfMedians::pivot(int val, int left, int right)
 {
-    int j = left;//keeps track of "sorted" area 
-    int l = -1;//keeps track of how many times val appears in list
+    int j = left;
+    int valIdx = 0; 
     for (int i = left; i <= (right-1); i++)
     {
-        //If value is less than or equal to val it is moved to the left of val
+        //If value is less than or equal to val it is moved
         if (list[i] <= val)
         {
-            for (int k = (i-1); k >= j; k--)
-            {
-                int temp = list[k];
-                list[k] = list[k+1];
-                list[k+1] = temp;
-            }
-            //Don't want to increment j if you find val as that messes things up
             if (list[i] == val)
             {
-                l++;
+                valIdx = i;
             }
-            else
-            {
-                j++;
-            }
+            int temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+            j++;
         }
     }
+    j--;
     //returns out location of properly placed pivot
-    return (j+l);
+    int temp = list[j];
+    list[j] = list[valIdx];
+    list[valIdx] = temp;
+    return (j);
 }
 
 void MedianOfMedians::sort(int left, int right)
