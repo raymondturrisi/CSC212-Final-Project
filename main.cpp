@@ -7,13 +7,16 @@
 #include <utility>
 #include <queue>
 #include <cmath>
+
+// Custom classes
 #include "KDTree.h"
+#include "Location.h"
 
 
 int main(int argc, char *argv[])
 {
 
-  KDT my_kdt;
+  KDT<int, Location> my_kdt;
 
   // Instantiating a new node
   // Node<int, Location> = new_node;
