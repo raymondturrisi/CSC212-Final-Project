@@ -10,6 +10,14 @@
 #include <queue>
 #include <cmath>
 
+//Find an approximation of median at a target index. Runs in linear time O(n)
+//First a loop that runs n/5 times
+//Then a recursive call that works on n/5 of the list
+//The pivot is done in a single pass O(n)
+//There are n/10 medians greater than the pivot and n/10 medians less than
+//For each of the medians there are also 2 more elements eliminated, so 3 elements eliminated per median
+//Leaves us with 7/10ths of the orginal array to search if target is not found
+
 MedianOfMedians::MedianOfMedians(std::vector<int> list)
 {
     this->list = list;
@@ -57,12 +65,12 @@ int MedianOfMedians::select(int left, int right, int target)
         return list[target];
     }
     //else you look for more medians by dividing array into two sections (one less than pivot and one greater than)
-    //less than pivot
+    //greater than pivot
     else if (target > newTarget)
     {
         return select(newTarget+1, right, target);
     }
-    //greater than pivot
+    //less than pivot
     return select(left, newTarget, target);
 }
 
@@ -95,7 +103,7 @@ int MedianOfMedians::pivot(int val, int left, int right)
 
 void MedianOfMedians::sort(int left, int right)
 {
-    //simple insertion sort
+    //insertion sort
     int i = left + 1;
     while (i <= right)
     {
