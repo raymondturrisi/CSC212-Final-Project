@@ -25,4 +25,6 @@ struct PoliceStations
     PoliceStations(int coordsCount, std::vector<std::string>& extraData);
 };
 
+//To create more stucts simply define more structs!
+
 #endif

@@ -21,6 +21,7 @@ class DataProcessing
         //and would serve as a unique identifier) 
         std::map<std::string, CoffeeShops> listOfCoffeeShops;//All extra data mapped to their coords
         std::map<std::string, PoliceStations> listOfPoliceStations;//All extra data mapped to their coords
+        //To add more locations to handle just add more maps. Make sure you define the structs in dataStructs.h
         
 };
 

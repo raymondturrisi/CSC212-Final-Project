@@ -71,6 +71,8 @@ DataProcessing::DataProcessing(std::string fName, int dimensions, std::string ty
         }
         coordCount = 0;
     }
+    //For more locations simply add more else-if statements with the code above copied, make sure to properly change
+    //listOf[BLANK] to proper location and confirm that you are emplacing the right struct.
 }
 
 DataProcessing::DataProcessing(std::string fName)
