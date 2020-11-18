@@ -12,7 +12,7 @@ class KDT {
     Node<num_type, specific_data> * root_node = NULL;
 
     void insert(std::vector<Node<num_type, specific_data>> & input_list);
-    void insert(Node<num_type, specific_data> input);
+    void insert(Node<num_type, specific_data> input, int height);
 
     Node<num_type, specific_data> find_nearest_neighbor(std::vector<num_type> & coordinate_vector);
 
@@ -64,7 +64,7 @@ void KDT<num_type, specific_data>::insert(std::vector<Node<num_type, specific_da
 }
 
 template<class num_type, class specific_data>
-void KDT<num_type, specific_data>::insert(Node<num_type, specific_data> input, int height){
+void KDT<num_type, specific_data>::insert(Node<num_type, specific_data> input, Node<num_type, specific_data> current, int height){
 
   int axis = height % input.coordinate_data.length();
 
@@ -74,13 +74,17 @@ void KDT<num_type, specific_data>::insert(Node<num_type, specific_data> input, i
   else{
 
     // recursive insertion
+    // If input < current in axis of interest:
+    //    insert(input, current.left, height + 1);
+    // Else:
+    //    insert(input, current.right, heigh + 1);
 
   }
 
 }
 
 template<class num_type, class specific_data>
-Node<num_type, specific_data> KDT<num_type, specific_data>::find_nearest_neighbor(std::vector<num_type> & coordinate_vector){
+Node<num_type, specific_data> KDT<num_type, specific_data>::find_nearest_neighbor(std::vector<num_type> & coordinate_search_vector){
 
 }
 
