@@ -16,6 +16,7 @@ class Node {
     Node();
     ~Node();
 
+  friend class KDT<num_type, specific_data>
 };
 
 // Note: These function definitions must be placed in the same file as the class

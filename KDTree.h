@@ -9,7 +9,7 @@ template<class num_type, class specific_data>
 class KDT {
 
   private:
-    Node<num_type, specific_data> * root_node = NULL;
+    Node<num_type, specific_data> * root = NULL;
 
     void insert(std::vector<Node<num_type, specific_data>> & input_list);
     void insert(Node<num_type, specific_data> input, int height);
@@ -41,45 +41,55 @@ void KDT<num_type, specific_data>::insert(std::vector<Node<num_type, specific_da
   // Calls the single node input function (below) to handle insertion
 
 
-  // COULD create Nodes from input file here, and forego passing as a parameter.
-
-
-  // (Queue for storing the axis being used)
-  // or (int axis = depth % Node.coordinate_data.size())
-
-
-  // List insertion pseudocode...
+  // Assumes input is a list of Nodes already created based on input file
 
   // i = 0, while i < input_list.length()
+  // For each Node that we want to insert into the tree
+  for(int i = 0; i < input_list.length(); i ++){
 
-  //    Pick the median Node/point
+    //    Pick the median Node
+    Node<num_type, specific_data> median = input_list[i];
 
-  //    Cycle the axis
+    //    Insert the median Node
+    // Should the height be passed as 0 or 1?
+    insert(median, this->root, 0);
 
-  //    Insert the median Node/point
+    //    Remove the median Node from the input list
+    input_list.erase(i);
 
-  //    Remove the median Node/point from the input list
+  }
+
 
 
 }
 
+
 template<class num_type, class specific_data>
-void KDT<num_type, specific_data>::insert(Node<num_type, specific_data> input, Node<num_type, specific_data> current, int height){
+void KDT<num_type, specific_data>::insert(Node<num_type, specific_data> node_to_insert, Node<num_type, specific_data> root, int height){
 
-  int axis = height % input.coordinate_data.length();
+  // This function handles the insertion of any single Node into the tree.
 
-  if(this->root_node == NULL){
-    this->root_node = input;
+  int axis = height % node_to_insert.coordinate_data.length();
+
+  // If this is the first node being inserted
+  if(!root){
+    root = node_to_insert;
   }
-  else{
 
-    // recursive insertion
-    // If input < current in axis of interest:
-    //    insert(input, current.left, height + 1);
-    // Else:
-    //    insert(input, current.right, heigh + 1);
-
+  // recursive insertion
+  // Else if node_to_insert < current in axis of interest:
+  //    insert(node_to_insert, current.left, height + 1);
+  else if(node_to_insert.coordinate_data[axis] < root.coordinate_data[axis]){
+    return insert(node_to_insert->left, root, height + 1);
   }
+
+  // Else if node_to_insert > current in axis of interest:
+  //    insert(node_to_insert->right, height + 1);
+  else if(node_to_insert.coordinate_data[axis] > root.coordinate_data[axis]){
+    return insert(node_to_insert->right, root, height + 1);
+  }
+
+  return node_to_insert;
 
 }
 
