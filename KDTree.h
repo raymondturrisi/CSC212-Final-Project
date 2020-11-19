@@ -35,11 +35,13 @@ class KDT {
 template<class num_type, class specific_data>
 void KDT<num_type, specific_data>::insert(std::vector<Node<num_type, specific_data>> & input_list){
 
+  // **** Should this function be converted to a recursive one ?? ****
+  // https://en.wikipedia.org/wiki/K-d_tree#Construction
+
   // This function constructs a KDTree when many input Nodes are available.
   // Selecting the points by always inserting the median keeps the tree more
   // balanced, and keeps performance closer to O(logn).
   // Calls the single node input function (below) to handle insertion
-
 
   // Assumes input is a list of Nodes already created based on input file
 
@@ -48,6 +50,11 @@ void KDT<num_type, specific_data>::insert(std::vector<Node<num_type, specific_da
   for(int i = 0; i < input_list.length(); i ++){
 
     //    Pick the median Node
+    // NOTE: Right now, grabs element at i but should be median.
+    // NOTE: Do we select our median based on any specific axis? (if
+    // so, then we'd be better off finding it within our single node
+    // insertion function.)
+
     Node<num_type, specific_data> median = input_list[i];
 
     //    Insert the median Node
