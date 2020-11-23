@@ -14,7 +14,7 @@ template<class specific_data>
 class MedianOfMedians
 {
     private:
-        std::vector<Node<specific_data>> list;
+        std::vector<Node<specific_data>>* list;
         int pivot(Node<specific_data> val, int left, int right);
         void sort(int left, int right);
         int dimension;
@@ -39,14 +39,14 @@ class MedianOfMedians
 template<class specific_data>
 MedianOfMedians<specific_data>::MedianOfMedians(std::vector<Node<specific_data>>& list, int dimension)
 {
-    this->list = list;
+    this->list = &list;
     this->dimension = dimension;
 }
 
 template<class specific_data>
 void MedianOfMedians<specific_data>::reset(std::vector<Node<specific_data>>& list, int dimension)
 {
-    this->list = list;
+    this->list = &list;
     this->dimension = dimension;
 }
 
@@ -57,7 +57,7 @@ Node<specific_data> MedianOfMedians<specific_data>::select(int left, int right, 
     if (right - left <= 5)
     {
         sort(left, right);
-        return list[target];
+        return (*list)[target];
     }
 
     //Treats list as groups of 5, finds median of each group and swaps median(s) to front of list
@@ -70,9 +70,9 @@ Node<specific_data> MedianOfMedians<specific_data>::select(int left, int right, 
             subRight = right;
         }
         sort(i,subRight);
-        Node<specific_data> temp = list[i+floor((subRight-i)/2)];
-        list[i+floor((subRight-i)/2)] = list[swapIdx];
-        list[swapIdx] = temp;
+        Node<specific_data> temp = (*list)[i+floor((subRight-i)/2)];
+        (*list)[i+floor((subRight-i)/2)] = (*list)[swapIdx];
+        (*list)[swapIdx] = temp;
         swapIdx++;
     }
 
@@ -85,7 +85,8 @@ Node<specific_data> MedianOfMedians<specific_data>::select(int left, int right, 
     //If the median is the target you are looking for then return the median
     if (location == target)
     {
-        return list[target];
+        Node<specific_data> test = (*list)[target];
+        return (*list)[target];
     }
     //else you look for more medians by dividing array into two sections (one less than pivot and one greater than)
     //greater than pivot
@@ -100,28 +101,29 @@ Node<specific_data> MedianOfMedians<specific_data>::select(int left, int right, 
 template<class specific_data>
 int MedianOfMedians<specific_data>::pivot(Node<specific_data> val, int left, int right)
 {
-    int j = left;
-    int valIdx = 0; 
+    int j = left-1;
+    //int valIdx = 0; 
     for (int i = left; i <= (right-1); i++)
     {
         //If value is less than or equal to val it is moved
-        if (list[i].coordinate_data[dimension] <= val.coordinate_data[dimension])
+        if ((*list)[i].coordinate_data[dimension] < val.coordinate_data[dimension])
         {
-            if (list[i].coordinate_data[dimension] == val.coordinate_data[dimension])
+            /* if (list[i].coordinate_data[dimension] == val.coordinate_data[dimension])
             {
                 valIdx = i;
-            }
-            Node<specific_data> temp = list[i];
-            list[i] = list[j];
-            list[j] = temp;
+            } */
             j++;
+            Node<specific_data> temp = (*list)[i];
+            (*list)[i] = (*list)[j];
+            (*list)[j] = temp;
+            
         }
     }
-    j--;
+    j++;
     //returns out location of properly placed pivot
-    Node<specific_data> temp = list[j];
-    list[j] = list[valIdx];
-    list[valIdx] = temp;
+    Node<specific_data> temp = (*list)[j];
+    (*list)[j] = (*list)[right];
+    (*list)[right] = temp;
     return (j);
 }
 
@@ -133,11 +135,11 @@ void MedianOfMedians<specific_data>::sort(int left, int right)
     while (i <= right)
     {
         int j = i;
-        while (j > left && list[j-1].coordinate_data[dimension] > list[j].coordinate_data[dimension] && list.size() != j)
+        while (j > left && (*list)[j-1].coordinate_data[dimension] > (*list)[j].coordinate_data[dimension] && (*list).size() != j)
         {
-            Node<specific_data> temp = list[j];
-            list[j] = list[j-1];
-            list[j-1] = temp;
+            Node<specific_data> temp = (*list)[j];//look into pointers
+            (*list)[j] = (*list)[j-1];
+            (*list)[j-1] = temp;
             j--;
         }
         i++;

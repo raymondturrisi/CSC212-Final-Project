@@ -1,14 +1,16 @@
 #include "DataStructs.h"
-#include <iostream>
-#include <fstream>
 #include <sstream>
 
-//Definitions of these structs are in dataStructs.h file. I had to declare them here for some reason.
 CoffeeShops::CoffeeShops(int coordsCount, std::vector<std::string>& extraData)
 {
     stars = std::stoi(extraData[coordsCount*terms]);
     std::istringstream(extraData[coordsCount*(terms+1)]) >> std::boolalpha >> public_bathroom;
     std::istringstream(extraData[coordsCount*(terms+2)]) >> std::boolalpha >> free_Wifi;
+}
+
+CoffeeShops::CoffeeShops()
+{
+    
 }
 
 PoliceStations::PoliceStations(int coordsCount, std::vector<std::string>& extraData)

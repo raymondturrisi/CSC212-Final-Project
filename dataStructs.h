@@ -14,6 +14,7 @@ struct CoffeeShops
     bool public_bathroom;
     bool free_Wifi;
     CoffeeShops(int coordsCount, std::vector<std::string>& extraData);
+    CoffeeShops();
 };
 struct PoliceStations
 {
@@ -22,6 +23,7 @@ struct PoliceStations
     bool k9;
     bool swat;
     PoliceStations(int coordsCount, std::vector<std::string>& extraData);
+    PoliceStations();
 };
 
 //To create more stucts simply define more structs!

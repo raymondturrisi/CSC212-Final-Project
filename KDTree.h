@@ -1,6 +1,7 @@
 #include "Node.h"
 #include "median.h"
 #include <vector>
+#include <algorithm>
 
 #ifndef NULL
 #define NULL 0x00
@@ -10,8 +11,9 @@ template<class specific_data>
 class KDT {
 
   private:
-    Node<specific_data> * root = NULL;
+    Node<specific_data>* root = NULL;
     int numOfDimensions = 0;
+    std::vector<Node<specific_data>> val;
 
     Node<specific_data>* insert(Node<specific_data>* node_to_insert, Node<specific_data>* root, int dimension);
 
@@ -20,8 +22,8 @@ class KDT {
     void destroy();
 
   public:
-    KDT(std::vector<Node<specific_data>> input_list);
-    void insert(Node<specific_data>* node_to_insert, int dimension);
+    KDT(std::vector<Node<specific_data>>& input_list, int numOfDimensions);
+    void insert(Node<specific_data>& node_to_insert, int dimension);
     ~KDT();
 
 };
@@ -37,7 +39,7 @@ class KDT {
 template<class specific_data>
 Node<specific_data>* KDT<specific_data>::insert(Node<specific_data>* node_to_insert, Node<specific_data>* root, int dimension)
 {
-  if (dimension = numOfDimensions)
+  if (dimension == numOfDimensions)
   {
     dimension = 0;
   }
@@ -45,7 +47,6 @@ Node<specific_data>* KDT<specific_data>::insert(Node<specific_data>* node_to_ins
   {
     return node_to_insert;
   }
-
   if(node_to_insert->coordinate_data[dimension] < root->coordinate_data[dimension])
   {
     root->left = insert(node_to_insert, root->left, dimension+1);
@@ -58,9 +59,10 @@ Node<specific_data>* KDT<specific_data>::insert(Node<specific_data>* node_to_ins
 }
 
 template<class specific_data>
-void KDT<specific_data>::insert(Node<specific_data>* node_to_insert, int dimension)
+void KDT<specific_data>::insert(Node<specific_data>& node_to_insert, int dimension)
 {
-  this->root = this->insert(node_to_insert, this->root, dimension);
+  //Node<specific_data>* test = this->insert(&node_to_insert, this->root, dimension);
+  this->root = this->insert(&node_to_insert, this->root, dimension);
 }
 
 template<class specific_data>
@@ -74,22 +76,29 @@ void KDT<specific_data>::destroy(){
 }
 
 template<class specific_data>
-KDT<specific_data>::KDT(std::vector<Node<specific_data>> input_list)
+KDT<specific_data>::KDT(std::vector<Node<specific_data>>& input_list, int numOfDimensions)
 {
+  this->numOfDimensions = numOfDimensions;
   int dimension = 0;
   MedianOfMedians<specific_data> findMedian = MedianOfMedians<specific_data>(input_list, dimension);
-  for(int i = 0; i < input_list.size(); i++)
+  int inputSize = input_list.size();
+  for(int i = 0; i < inputSize; i++)
   {
     int medianIdx = floor(input_list.size()/2);
     Node<specific_data> median = findMedian.select(0, (input_list.size()-1), medianIdx);
 
+    val.push_back(input_list[medianIdx]);
     //    Insert the median Node
-    insert(median, dimension);
+    this->insert(val[i], dimension);
 
     //    Remove the median Node from the input list
+    //auto idx = std::find(begin(input_list), end(input_list), median);
+    //input_list.erase(idx);
+
+    
     input_list.erase(input_list.begin() + medianIdx);
     dimension++;
-    if (dimension = numOfDimensions)
+    if (dimension == numOfDimensions)
     {
       dimension = 0;
     }

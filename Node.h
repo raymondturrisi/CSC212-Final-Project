@@ -1,7 +1,11 @@
 #ifndef MEDIAN_H
 #define MEDIAN_H
 #include <vector>
+//#include "DataStructs.h"
 
+#ifndef NULL
+#define NULL 0x00
+#endif
 
 template<class specific_data>
 class KDT;
@@ -12,10 +16,9 @@ friend class KDT<specific_data>;
   private:
     // Points to any class you pass as <specficic_data> arg
     specific_data other_data;
-    Node* left;
-    Node* right;
-
-    
+    Node* left = NULL;
+    Node* right = NULL;
+    bool empty = false;
 
     void destroy();
 
@@ -23,7 +26,9 @@ friend class KDT<specific_data>;
     Node(std::vector<double> & coordinate_data, specific_data & other_data);
     Node(std::vector<double> & coordinate_data);
     std::vector<double> coordinate_data;
+    Node();
     ~Node();
+    
 };
 
 // Note: These function definitions must be placed in the same file as the class
@@ -47,6 +52,12 @@ Node<specific_data>::Node(std::vector<double> & coordinate_data)
   this->coordinate_data = coordinate_data;
 }
 
+template<class specific_data>
+Node<specific_data>::Node()
+{
+  this->empty = true;
+}
+
 
 template<class specific_data>
 Node<specific_data>::~Node(){
@@ -54,8 +65,11 @@ Node<specific_data>::~Node(){
 }
 
 template<class specific_data>
-void Node<specific_data>::destroy(){
-  destroy();
+void Node<specific_data>::destroy()
+{
+  //code
 }
+
+
 
 #endif

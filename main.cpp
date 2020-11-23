@@ -15,18 +15,10 @@
 
 int main(int argc, char *argv[])
 {
-
-  //KDT<int, Location> my_kdt;
-
-  // Instantiating a new node
-  // Node<int, Location> = new_node;
-  // my_kdt.append(new_node);
-
-  // Can create a for loop to read in data from a file,
-  // create Nodes and append them.
-  // for line in file:
-  //      Node<int, Location> = new_node;
-  //      my_kdt.append(new_node);
+  if (argc == 0)
+  {
+    std::cout<< "Please input data in the form of: /n {File name}, {# of Dimensions} /n OR /n {File name}"<< std::endl;
+  }
 
   //For files with extra data (ie. Coffee shops, Police stations):
   int dimensions = std::stoi(argv[2]);
@@ -35,9 +27,7 @@ int main(int argc, char *argv[])
   //      DataProcessing DP = DataProcessing(argv[1]);
   //Can access coordinate data by:
   //      DP.coords[index]
-  //Can access extra data through a map:
-  //      std::map<std::string, CoffeeShops> test = DP.listOfCoffeeShops;
-  //The Key to the map is the coordinates of the shop concatenated together in a string (no spaces) in the format of lowest dimenstion to highest (ie. X + Y + Z + ...)
+  //      DP.outputExtraData[index]
   
   //Creating Nodes
   std::vector<double>& outputCoords = DP.coords;
@@ -56,5 +46,5 @@ int main(int argc, char *argv[])
     temp.clear();
   }
 
-  KDT<CoffeeShops> test = KDT<CoffeeShops>(nodeList);
+  KDT<CoffeeShops> test = KDT<CoffeeShops>(nodeList, dimensions);
 }
