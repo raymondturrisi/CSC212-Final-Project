@@ -12,6 +12,10 @@ class Node {
 
     void destroy();
 
+    Node<num_type, specific_data> * left_child = NULL;
+    Node<num_type, specific_data> * right_child = NULL;
+
+
   public:
     Node();
     ~Node();

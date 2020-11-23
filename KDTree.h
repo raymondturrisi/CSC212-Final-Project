@@ -11,7 +11,7 @@ class KDT {
   private:
     Node<num_type, specific_data> * root = NULL;
 
-    void insert(std::vector<Node<num_type, specific_data>> & input_list);
+    void insert(std::vector<Node<num_type, specific_data>> & input_list, int depth);
     void insert(Node<num_type, specific_data> input, int height);
 
     Node<num_type, specific_data> find_nearest_neighbor(std::vector<num_type> & coordinate_vector);
@@ -33,41 +33,57 @@ class KDT {
 // -------------------------------------------------------------------
 
 template<class num_type, class specific_data>
-void KDT<num_type, specific_data>::insert(std::vector<Node<num_type, specific_data>> & input_list){
+KDT<num_type, specific_data> KDT<num_type, specific_data>::insert(std::vector<Node<num_type, specific_data>> & input_list, int depth){
 
-  // **** Should this function be converted to a recursive one ?? ****
+  // **** Should this function be a recursive one? Yes. ****
   // https://en.wikipedia.org/wiki/K-d_tree#Construction
 
-  // This function constructs a KDTree when many input Nodes are available.
-  // Selecting the points by always inserting the median keeps the tree more
-  // balanced, and keeps performance closer to O(logn).
-  // Calls the single node input function (below) to handle insertion
+  // - This function constructs a KDTree when many input Nodes are available.
+  // - Selecting the points by always inserting the median in the current axis
+  //   keeps the tree more balanced, and keeps performance closer to O(logn).
 
-  // Assumes input is a list of Nodes already created based on input file
+  // Select axis based on depth so that axis cycles through all valid values
+  int axis = depth % input_list[0].coordinate_vector.size();
 
-  // i = 0, while i < input_list.length()
-  // For each Node that we want to insert into the tree
-  for(int i = 0; i < input_list.length(); i ++){
+  // Sort Nodes list and choose median as pivot element
 
-    //    Pick the median Node
-    // NOTE: Right now, grabs element at i but should be median.
-    // NOTE: Do we select our median based on any specific axis? (if
-    // so, then we'd be better off finding it within our single node
-    // insertion function.)
+  // Modify the input to be sorted based on the axis, and keep track of the median Node.
+  // The find_median() function hiddenly operates on the median_node_index variable.
+  int median_node_index = 0;
+  Node<num_type, specific_data> & median_node = this->find_median(input_list, axis, median_node_index);
 
-    Node<num_type, specific_data> median = input_list[i];
-
-    //    Insert the median Node
-    // Should the height be passed as 0 or 1?
-    insert(median, this->root, 0);
-
-    //    Remove the median Node from the input list
-    input_list.erase(i);
-
+  // If this is the first node being inserted
+  if(!root){
+    this->root = median_node;
+    return;
   }
+  else{
+    // Make left and right halves.
+    //
+    // Is it direly important that this functions in better than Theta(n) time?
+    // Does this perform in Theta(logn) times since the size of the list is always cut in half?
+    //
+    // When would this function ever come across a large enough sized list to cause
+    // it to take a longer than acceptable time to execute?
+    std::vector<Node<num_type, specific_data>> left_half = {};
+    std::vector<Node<num_type, specific_data>> right_half = {};
 
+    for(int i = 0; i < input_list; i++){
+      if(i < median_node_index){
+        left_half.append(input_list[i]);
+      }
+      else if(i > median_node_index){
+        right_half.append(input_list[i]);
+      }
+    }
 
-
+    // Construct subtrees with left and right halves recursively.
+    median_node.left_child = insert(left_half, depth + 1);
+    median_node.right_child = insert(right_half, depth + 1);
+     
+    // Insert the median_node
+    return median_node;
+  }
 }
 
 
