@@ -1,22 +1,29 @@
+#ifndef MEDIAN_H
+#define MEDIAN_H
 #include <vector>
 
 
-template<class num_type, class specific_data>
-class Node {
+template<class specific_data>
+class KDT;
 
+template<class specific_data>
+class Node {
+friend class KDT<specific_data>;
   private:
     // Points to any class you pass as <specficic_data> arg
-    specific_data * other_data = NULL;
+    specific_data other_data;
+    Node* left;
+    Node* right;
 
-    std::vector<num_type> coordinate_data = {};
+    
 
     void destroy();
 
   public:
-    Node();
+    Node(std::vector<double> & coordinate_data, specific_data & other_data);
+    Node(std::vector<double> & coordinate_data);
+    std::vector<double> coordinate_data;
     ~Node();
-
-  friend class KDT<num_type, specific_data>
 };
 
 // Note: These function definitions must be placed in the same file as the class
@@ -27,17 +34,28 @@ class Node {
 // |return type| |class name|::|function name and params| { |code| }
 // -------------------------------------------------------------------
 
-template<class num_type, class specific_data>
-Node<num_type, specific_data>::Node(){
-// Constructor
+template<class specific_data>
+Node<specific_data>::Node(std::vector<double> & coordinate_data, specific_data & other_data)
+{
+  this->other_data = other_data;
+  this->coordinate_data = coordinate_data;
 }
 
-template<class num_type, class specific_data>
-Node<num_type, specific_data>::~Node(){
+template<class specific_data>
+Node<specific_data>::Node(std::vector<double> & coordinate_data)
+{
+  this->coordinate_data = coordinate_data;
+}
+
+
+template<class specific_data>
+Node<specific_data>::~Node(){
   destroy();
 }
 
-template<class num_type, class specific_data>
-void Node<num_type, specific_data>::destroy(){
+template<class specific_data>
+void Node<specific_data>::destroy(){
   destroy();
 }
+
+#endif

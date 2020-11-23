@@ -1,12 +1,11 @@
+
 #ifndef DATASTRUCTS_H
 #define DATASTRUCTS_H
 
 #include <vector>
 #include <string>
 
-//Data types that we can handle. To add more simply add more structs here and define the constuctor in the 
-//DataProcessing.cpp file. For some reason I have to declare them in that file and not a dataStructs.cpp file
-//and idk why but it works.
+//Data types that we can handle. To add more simply add more structs here and define the constuctor in the DataStructs.cpp file
 
 struct CoffeeShops
 {

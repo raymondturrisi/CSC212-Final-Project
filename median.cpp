@@ -1,5 +1,6 @@
 #include "median.h"
 
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -18,12 +19,12 @@
 //For each of the medians there are also 2 more elements eliminated, so 3 elements eliminated per median
 //Leaves us with 7/10ths of the orginal array to search if target is not found
 
-MedianOfMedians::MedianOfMedians(std::vector<int> list)
+MedianOfMedians::MedianOfMedians(std::vector<Node>& list)
 {
     this->list = list;
 }
 
-void MedianOfMedians::reset(std::vector<int> list)
+void MedianOfMedians::reset(std::vector<double>& list)
 {
     this->list = list;
 }
@@ -47,7 +48,7 @@ int MedianOfMedians::select(int left, int right, int target)
             subRight = right;
         }
         sort(i,subRight);
-        int temp = list[i+floor((subRight-i)/2)];
+        double temp = list[i+floor((subRight-i)/2)];
         list[i+floor((subRight-i)/2)] = list[swapIdx];
         list[swapIdx] = temp;
         swapIdx++;
@@ -87,7 +88,7 @@ int MedianOfMedians::pivot(int val, int left, int right)
             {
                 valIdx = i;
             }
-            int temp = list[i];
+            double temp = list[i];
             list[i] = list[j];
             list[j] = temp;
             j++;
@@ -95,7 +96,7 @@ int MedianOfMedians::pivot(int val, int left, int right)
     }
     j--;
     //returns out location of properly placed pivot
-    int temp = list[j];
+    double temp = list[j];
     list[j] = list[valIdx];
     list[valIdx] = temp;
     return (j);
@@ -110,7 +111,7 @@ void MedianOfMedians::sort(int left, int right)
         int j = i;
         while (j > left && list[j-1] > list[j] && list.size() != j)
         {
-            int temp = list[j];
+            double temp = list[j];
             list[j] = list[j-1];
             list[j-1] = temp;
             j--;
