@@ -19,22 +19,24 @@
 //For each of the medians there are also 2 more elements eliminated, so 3 elements eliminated per median
 //Leaves us with 7/10ths of the orginal array to search if target is not found
 
-MedianOfMedians::MedianOfMedians(std::vector<Node>& list)
+MedianOfMedians::MedianOfMedians(std::vector<std::shared_ptr<BaseLocation>>& list, int dimension)
+: list(list), dimension(dimension)
 {
-    this->list = list;
 }
 
-void MedianOfMedians::reset(std::vector<double>& list)
+void MedianOfMedians::reset(std::vector<std::shared_ptr<BaseLocation>>& list, int dimension)
 {
     this->list = list;
+    this->dimension = dimension;
 }
 
-int MedianOfMedians::select(int left, int right, int target)
+std::shared_ptr<BaseLocation> MedianOfMedians::select(int left, int right, int target)
 {
     //If segment of list is less than 5 then base case is found and median can be found without recursion
     if (right - left <= 5)
     {
         sort(left, right);
+        medianIdx = target;
         return list[target];
     }
 
@@ -48,7 +50,7 @@ int MedianOfMedians::select(int left, int right, int target)
             subRight = right;
         }
         sort(i,subRight);
-        double temp = list[i+floor((subRight-i)/2)];
+        std::shared_ptr<BaseLocation> temp = list[i+floor((subRight-i)/2)];
         list[i+floor((subRight-i)/2)] = list[swapIdx];
         list[swapIdx] = temp;
         swapIdx++;
@@ -56,7 +58,7 @@ int MedianOfMedians::select(int left, int right, int target)
 
     //Recursively call select to now find the median of the group of medians (old medians and new medians)
     int newTarget = left + floor((swapIdx-left)/2);
-    int median = select(left, swapIdx, newTarget);
+    std::shared_ptr<BaseLocation> median = select(left, swapIdx, newTarget);
 
     //Pivot re-orders the list around the median of medians and returns out the index location of median of medians
     int location = pivot(median, left, right);
@@ -75,30 +77,28 @@ int MedianOfMedians::select(int left, int right, int target)
     return select(left, newTarget, target);
 }
 
-int MedianOfMedians::pivot(int val, int left, int right)
+int MedianOfMedians::pivot(std::shared_ptr<BaseLocation> val, int left, int right)
 {
-    int j = left;
-    int valIdx = 0; 
+    std::shared_ptr<BaseLocation> temp = list[medianIdx];
+    list[medianIdx] = list[right];
+    list[right] = temp;
+    int j = left-1;
     for (int i = left; i <= (right-1); i++)
     {
         //If value is less than or equal to val it is moved
-        if (list[i] <= val)
+        if (list[i]->dimensions_data[dimension] < val->dimensions_data[dimension])
         {
-            if (list[i] == val)
-            {
-                valIdx = i;
-            }
-            double temp = list[i];
+            j++;
+            std::shared_ptr<BaseLocation> temp = list[i];
             list[i] = list[j];
             list[j] = temp;
-            j++;
         }
     }
-    j--;
+    j++;
     //returns out location of properly placed pivot
-    double temp = list[j];
-    list[j] = list[valIdx];
-    list[valIdx] = temp;
+    temp = list[j];
+    list[j] = list[right];
+    list[right] = temp;
     return (j);
 }
 
@@ -109,9 +109,9 @@ void MedianOfMedians::sort(int left, int right)
     while (i <= right)
     {
         int j = i;
-        while (j > left && list[j-1] > list[j] && list.size() != j)
+        while (j > left && list[j-1]->dimensions_data[dimension] > list[j]->dimensions_data[dimension] && list.size() != j)
         {
-            double temp = list[j];
+            std::shared_ptr<BaseLocation> temp = list[j];
             list[j] = list[j-1];
             list[j-1] = temp;
             j--;

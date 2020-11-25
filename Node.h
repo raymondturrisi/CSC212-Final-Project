@@ -1,75 +1,29 @@
 #ifndef MEDIAN_H
 #define MEDIAN_H
 #include <vector>
-//#include "DataStructs.h"
+#include <memory>
+#include "DataClasses.h"
 
 #ifndef NULL
-#define NULL 0x00
+#define NULL nullptr
 #endif
 
-template<class specific_data>
-class KDT;
 
-template<class specific_data>
-class Node {
-friend class KDT<specific_data>;
-  private:
-    // Points to any class you pass as <specficic_data> arg
-    specific_data other_data;
+class Node 
+{
+  private: 
+    // Data
     Node* left = NULL;
     Node* right = NULL;
-    bool empty = false;
+    std::shared_ptr<BaseLocation> location;
 
+    // Methods
     void destroy();
 
   public:
-    Node(std::vector<double> & coordinate_data, specific_data & other_data);
-    Node(std::vector<double> & coordinate_data);
-    std::vector<double> coordinate_data;
-    Node();
+    Node(std::shared_ptr<BaseLocation> input);
     ~Node();
-    
+  friend class KDT;
 };
-
-// Note: These function definitions must be placed in the same file as the class
-// declaration, a restriction which occurs when using templated classes.
-
-// ------- Outline For Defining Methods on Templated Classes ---------
-// template<class |param1_name, ... , paramN_name|>
-// |return type| |class name|::|function name and params| { |code| }
-// -------------------------------------------------------------------
-
-template<class specific_data>
-Node<specific_data>::Node(std::vector<double> & coordinate_data, specific_data & other_data)
-{
-  this->other_data = other_data;
-  this->coordinate_data = coordinate_data;
-}
-
-template<class specific_data>
-Node<specific_data>::Node(std::vector<double> & coordinate_data)
-{
-  this->coordinate_data = coordinate_data;
-}
-
-template<class specific_data>
-Node<specific_data>::Node()
-{
-  this->empty = true;
-}
-
-
-template<class specific_data>
-Node<specific_data>::~Node(){
-  destroy();
-}
-
-template<class specific_data>
-void Node<specific_data>::destroy()
-{
-  //code
-}
-
-
 
 #endif
