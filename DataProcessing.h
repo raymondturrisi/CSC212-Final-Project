@@ -2,23 +2,23 @@
 #include <string>
 #include <map>
 
-#include "dataStructs.h"
+#include "DataClasses.h"
 
-template<class specific_data>
+
 class DataProcessing
 {
-    private:
-        std::vector<std::string> extraData;//internal vector for collecting the extra data
     public:
+        //Class Mechanics
         DataProcessing(std::string fname, int dimensions);//Process files with coords + extra data
         DataProcessing(std::string fname);//Process files with just coords
 
+        //Data
         std::vector<double> coords;//coords
-        std::vector<specific_data> outputExtraData;
+        std::vector<std::string> extraData;//extra data
 };
 
-template<class specific_data>
-DataProcessing<specific_data>::DataProcessing(std::string fName, int dimensions)
+
+DataProcessing::DataProcessing(std::string fName, int dimensions)
 {
     int val = 0;
     int count = 0;
@@ -40,15 +40,10 @@ DataProcessing<specific_data>::DataProcessing(std::string fName, int dimensions)
             extraData.push_back(data);
         }
     }
-    int coordCount = 0;
-    for (int i = 0; i < coords.size(); i+=dimensions)
-    {
-        outputExtraData.push_back(specific_data(coordCount, extraData));
-    }
 }
 
-template<class specific_data>
-DataProcessing<specific_data>::DataProcessing(std::string fName)
+
+DataProcessing::DataProcessing(std::string fName)
 {
     int val;
     std::ifstream infile(fName);
