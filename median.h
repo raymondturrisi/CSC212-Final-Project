@@ -13,7 +13,7 @@
 class MedianOfMedians
 {
     private:
-        std::vector<std::shared_ptr<BaseLocation>>& list;
+        std::vector<std::shared_ptr<BaseLocation>>* list;
         int pivot(std::shared_ptr<BaseLocation> val, int left, int right);
         void sort(int left, int right);
         int dimension;

@@ -3,6 +3,7 @@
 #include <vector>
 
 
+
 Node::Node(std::shared_ptr<BaseLocation> input)
     : location(input)
 {

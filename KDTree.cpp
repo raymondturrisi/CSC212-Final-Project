@@ -1,12 +1,51 @@
 #include "KDTree.h"
 #include <vector>
 
-Node* KDT::insert(std::vector<std::shared_ptr<BaseLocation>> input_list, Node* root,  int dimension)
+/* bool KDT::find_nearest_neighbor(std::vector<double> & coordinate_vector, int& dimension, Node::SPtr& root, int& kNeighbors, KDT::BaseVectorOfPairs& output, std::vector<double>& distances)
+{
+  if (dimension == numOfDimensions)
+  {
+    dimension = 0;
+  }
+  if (!root)
+  {
+    return true;
+  }
+  if (coordinate_vector[dimension] < root->location->dimensions_data[dimension])
+  {
+    if(output.size() < kNeighbors)
+    {
+
+    }
+  }
+}
+
+KDT::BaseVector KDT::find_nearest_neighbor(std::vector<double> & coordinate_vector, int& dimension, Node::SPtr& root, int& kNeighbors, BaseVector output)
+{
+
+}
+
+KDT::BaseVector KDT::find_nearest_neighbor(std::vector<double> & coordinate_vector, int& kNeighbors)
+{
+  int dimension = 0;
+  KDT::BaseVector output(kNeighbors);
+  find_nearest_neighbor(coordinate_vector, dimension, this->root, kNeighbors, output);
+}
+
+KDT::BaseVectorOfPairs KDT::find_nearest_neighbor(std::vector<double> & coordinate_vector, int& kNeighbors, bool& distance)
+{
+  int dimension = 0;
+  KDT::BaseVector output(kNeighbors);
+  std::vector<double> distances(kNeighbors);
+  find_nearest_neighbor(coordinate_vector, dimension, this->root, kNeighbors, output, distance);
+}
+ */
+Node::SPtr KDT::insert(KDT::BaseVector& input_list, Node::SPtr& root,  int dimension)//vector
 {
   int inputSize = input_list.size();
   if (inputSize == 1)
   {
-    return new Node(input_list[0]);
+    return std::make_unique<Node>(input_list[0]);
   }
   if (dimension == numOfDimensions)
   {
@@ -14,12 +53,12 @@ Node* KDT::insert(std::vector<std::shared_ptr<BaseLocation>> input_list, Node* r
   }
 
   int medianIdx = floor(inputSize/2);
-  findMedian.reset(input_list,dimension);
-  std::shared_ptr<BaseLocation> median = findMedian.select(0,(inputSize-1),medianIdx);
+  findMedian.reset(input_list, dimension);
+  BaseLocation::SPtr median = findMedian.select(0,(inputSize-1),medianIdx);
   
-  root = new Node(median);
-  std::vector<std::shared_ptr<BaseLocation>> leftHalf(input_list.begin(), input_list.begin()+medianIdx);
-  std::vector<std::shared_ptr<BaseLocation>> rightHalf(input_list.begin()+medianIdx+1, input_list.end());
+  root = std::make_unique<Node>(median);
+  KDT::BaseVector leftHalf(input_list.begin(), input_list.begin()+medianIdx);
+  KDT::BaseVector rightHalf(input_list.begin()+medianIdx+1, input_list.end());
   if (leftHalf.size() > 0)
   {
     root->left = this->insert(leftHalf, root->left, dimension+1);
@@ -28,10 +67,10 @@ Node* KDT::insert(std::vector<std::shared_ptr<BaseLocation>> input_list, Node* r
   {
     root->right = this->insert(rightHalf, root->right, dimension+1);
   }
-  return root;
+  return std::move(root);
 }
 
-Node* KDT::insert(std::shared_ptr<BaseLocation> input, Node* root,  int dimension)
+Node::SPtr KDT::insert(BaseLocation::SPtr input, Node::SPtr& root,  int dimension)
 {
   if (dimension == numOfDimensions)
   {
@@ -39,7 +78,7 @@ Node* KDT::insert(std::shared_ptr<BaseLocation> input, Node* root,  int dimensio
   }
   if (!root)
   {
-    return new Node(input);
+    return std::make_unique<Node>(input);
   }
   if(input->dimensions_data[dimension] < root->location->dimensions_data[dimension])
   {
@@ -49,15 +88,15 @@ Node* KDT::insert(std::shared_ptr<BaseLocation> input, Node* root,  int dimensio
   {
     root->right = insert(input, root->right, dimension+1);
   }
-  return root;
+  return std::move(root);
 }
 
-void KDT::insert(std::vector<std::shared_ptr<BaseLocation>>& input_list)
+void KDT::insert(KDT::BaseVector& input_list)//vector
 {
   this->root = this->insert(input_list, this->root, 0);
 }
 
-void KDT::insert(std::shared_ptr<BaseLocation>& input)
+void KDT::insert(BaseLocation::SPtr& input)//single location
 {
   this->root = this->insert(input, this->root, 0);
 }
@@ -67,7 +106,7 @@ void KDT::insert(std::shared_ptr<BaseLocation>& input)
 
 } */
 
-void KDT::preorder(Node* root, std::ostream& os)
+void KDT::preorder(Node::SPtr& root, std::ostream& os)
 {
   if(!root)
   {
@@ -83,7 +122,7 @@ void KDT::preorder(Node* root, std::ostream& os)
   return;
 }
 
-void KDT::inorder(Node* root, std::ostream& os)
+void KDT::inorder(Node::SPtr& root, std::ostream& os)
 {
     if(!root)
     {
@@ -95,12 +134,34 @@ void KDT::inorder(Node* root, std::ostream& os)
     {
       os << root->location->dimensions_data[i] << ", ";
     }
+    os << std::endl;
     this->inorder(root->right, os);
 
     return;
 }
 
-void KDT::postorder(Node* root, std::ostream& os)
+void KDT::inorderDot(Node::SPtr& root, std::ostream& os)
+{
+    if(!root)
+    {
+        return;
+    }
+
+    this->inorderDot(root->left, os);
+    if (root->left)
+    {
+      os << "<" << root->location->dimensions_data[0] << "," << root->location->dimensions_data[1] << "> -> <" << root->left->location->dimensions_data[0] << "," << root->left->location->dimensions_data[1] << ">;" << "\n";
+    }
+    if (root->right)
+    {
+      os << "<" << root->location->dimensions_data[0] << "," << root->location->dimensions_data[1] << "> -> <" << root->right->location->dimensions_data[0] << "," << root->right->location->dimensions_data[1] << ">;"  << "\n";
+    }
+    this->inorderDot(root->right, os);
+
+    return;
+}
+
+void KDT::postorder(Node::SPtr& root, std::ostream& os)
 {
     if(!root)
     {
@@ -117,7 +178,7 @@ void KDT::postorder(Node* root, std::ostream& os)
     return;
 }
 
-Node* KDT::getRoot()
+Node::SPtr& KDT::getRoot()
 {
   return this->root;
 }
@@ -126,7 +187,7 @@ void KDT::destroy(){
   //TODO: Recursively destroy data structure.
 }
 
-KDT::KDT(std::vector<std::shared_ptr<BaseLocation>>& input_list, int& numOfDimensions)
+KDT::KDT(KDT::BaseVector& input_list, int& numOfDimensions)
 : findMedian(MedianOfMedians(input_list,0))
 {
     this->numOfDimensions = numOfDimensions;

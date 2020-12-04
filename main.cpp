@@ -60,19 +60,35 @@ int main(int argc, char *argv[])
     std::cout<< "Please input data in the form of: /n {File name}, {# of Dimensions} /n OR /n {File name}"<< std::endl;
   }
 
+  //CURRENT SETUP:
+  //Two Files (with same number of dimensions) into one tree
+
   //For files with extra data (ie. Coffee shops, Police stations):
-  int dimensions = std::stoi(argv[2]);
-  std::vector<double> coords;
-  std::vector<std::string> extraData;
-  int dimensions2 = std::stoi(argv[4]);
-  std::vector<double> coords2;
-  std::vector<std::string> extraData2;
+
+  int dimensions = std::stoi(argv[2]);//dimensions of first file
+  std::vector<double> coords;//coords of first file
+  std::vector<std::string> extraData;//extra data of first file
+
+
+  int dimensions2 = std::stoi(argv[4]);//dimensions of second file
+  std::vector<double> coords2;//coords of second file
+  std::vector<std::string> extraData2;//extra data of second file
+
+  //Assign coords and extra data to appropriate vectors
   withExtra(argv[1], dimensions, coords, extraData);
   withExtra(argv[3], dimensions2, coords2, extraData2);
+
+  //If you had a tree without extra data
   //regularData(argv[1], coords);
   
+
+  //BUILDING THE VECTORS
+  //For every object type you will have to build it in a different for loop
+  //If two files have different number of dimensions you cannot combine them in the same tree like I am doing below
+
+  //Coffee Shop vector
   int k = 0;
-  std::vector<std::shared_ptr<BaseLocation>> locationList;
+  KDT::BaseVector locationList;
   for (int i = 0; i < coords.size(); i+=dimensions)
   {
     std::vector<double> temp;
@@ -80,10 +96,12 @@ int main(int argc, char *argv[])
     {
       temp.push_back(coords[i+j]);
     }
-    locationList.push_back(std::shared_ptr<CoffeeShops>(new CoffeeShops(temp,extraData,k)));
+    locationList.push_back(std::make_shared<CoffeeShops>(temp,extraData,k));
     k++;
     temp.clear();
   }
+
+  //Police Shop Vector
   k = 0;
   for (int i = 0; i < coords2.size(); i+=dimensions2)
   {
@@ -92,14 +110,17 @@ int main(int argc, char *argv[])
     {
       temp.push_back(coords2[i+j]);
     }
-    locationList.push_back(std::shared_ptr<PoliceStations>(new PoliceStations(temp,extraData2,k)));
+    locationList.push_back(std::make_shared<PoliceStations>(temp,extraData2,k));
     k++;
     temp.clear();
   }
 
+  //Create tree and initialize it with locations list and the number of dimensions
   KDT test = KDT(locationList, dimensions);
+
+  //Printing the tree
   std::ostringstream oss;
-  test.inorder(test.getRoot(), oss);
+  test.inorderDot(test.getRoot(), oss);
   std::cout << oss.str() << std::endl;
 }
 

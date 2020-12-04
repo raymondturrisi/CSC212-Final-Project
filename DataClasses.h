@@ -4,14 +4,61 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 
-class BaseLocation
+class BaseLocation//Abstract class
 {
     public:
-        virtual ~BaseLocation() = 0;
+        typedef std::shared_ptr<BaseLocation> SPtr;
+
+    public:
         std::vector<double> dimensions_data;
+        
     protected:
         int terms;
+
+    public:
+
+        virtual ~BaseLocation() = 0;
+
+        BaseLocation() : terms(-1)
+        { }
+
+        BaseLocation(const BaseLocation& other)
+            : terms(other.terms)
+        {
+            dimensions_data = other.dimensions_data;
+        }
+
+ /*       BaseLocation(BaseLocation&& other)
+            : p{ other.p }
+        {
+            other.p = nullptr;
+        }*/
+
+        BaseLocation& operator=(const BaseLocation& other)
+        {
+            if (&other != this) {
+                terms = other.terms;
+                dimensions_data = other.dimensions_data;
+            }
+            return *this;
+        }
+
+        //BaseLocation& operator=(BaseLocation&& other)
+        //{
+        //    if (&other != this) {
+        //        delete p;
+        //        p = other.p;
+        //        other.p = nullptr;
+        //    }
+        //    return *this;
+        //}
+};
+
+class DefaultLocation : public BaseLocation
+{
+
 };
 
 class CoffeeShops : public BaseLocation
@@ -32,6 +79,24 @@ class CoffeeShops : public BaseLocation
         bool getPublicBathroom();
         bool getFreeWifi();
         ~CoffeeShops();
+
+        CoffeeShops(const CoffeeShops& other)
+            : BaseLocation(other)
+        {
+            this->stars = other.stars;
+            this->public_bathroom = other.public_bathroom;
+            this->free_wifi = other.free_wifi;
+        }
+
+        CoffeeShops& operator=(const CoffeeShops& other)
+        {
+            if (&other != this) {
+                this->stars = other.stars;
+                this->public_bathroom = other.public_bathroom;
+                this->free_wifi = other.free_wifi;
+            }
+            return *this;
+        }
 };
 
 class PoliceStations : public BaseLocation
@@ -52,27 +117,23 @@ class PoliceStations : public BaseLocation
         bool getK9();
         bool getSwat();
         ~PoliceStations();
+
+        PoliceStations(const PoliceStations& other)
+            : BaseLocation(other)
+        {
+            this->is_equiped = other.is_equiped;
+            this->k9 = other.k9;
+            this->swat = other.swat;
+        }
+
+        PoliceStations& operator=(const PoliceStations& other)
+        {
+            if (&other != this) {
+                this->is_equiped = other.is_equiped;
+                this->k9 = other.k9;
+                this->swat = other.swat;
+            }
+            return *this;
+        }
 };
-
-/* struct CoffeeShops
-{
-    int terms = 3;
-    int stars;
-    bool public_bathroom;
-    bool free_Wifi;
-    CoffeeShops(int coordsCount, std::vector<std::string>& extraData);
-    CoffeeShops();
-};
-struct PoliceStations
-{
-    int terms = 3;
-    bool is_equiped;
-    bool k9;
-    bool swat;
-    PoliceStations(int coordsCount, std::vector<std::string>& extraData);
-    PoliceStations();
-}; */
-
-//To create more stucts simply define more structs!
-
 #endif

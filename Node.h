@@ -11,19 +11,21 @@
 
 class Node 
 {
+  friend class KDT;
+  public: //Typedefs (have to be defined first)
+    typedef std::shared_ptr<Node> SPtr;
   private: 
     // Data
-    Node* left = NULL;
-    Node* right = NULL;
-    std::shared_ptr<BaseLocation> location;
+    Node::SPtr left = NULL;
+    Node::SPtr right = NULL;
+    BaseLocation::SPtr location;
 
     // Methods
     void destroy();
 
-  public:
-    Node(std::shared_ptr<BaseLocation> input);
+  public: //Class Mechanics
+    Node(BaseLocation::SPtr input);
     ~Node();
-  friend class KDT;
 };
 
 #endif

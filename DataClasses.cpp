@@ -1,6 +1,7 @@
 #include "DataClasses.h"
 #include <sstream>
 
+
 BaseLocation::~BaseLocation()
 {
 
