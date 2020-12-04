@@ -26,10 +26,10 @@ class KDT
     void insert(BaseVector& input_list);//call something else
 
     bool find_nearest_neighbor(std::vector<double> & coordinate_vector, int& dimension, Node::SPtr& root, int& kNeighbors, KDT::BaseVector& output, std::vector<double>& distances);
-    bool find_nearest_neighbor(std::vector<double> & coordinate_vector, int& dimension, Node::SPtr& root, int& kNeighbors, KDT::BaseVector& output);    
+    bool find_nearest_neighbor(std::vector<double> & coordinate_vector, int& dimension, Node::SPtr& root, int& kNeighbors, KDT::BaseVector& output);
     bool addToList(BaseVectorOfPairs& output, int& kNeighbors, BaseLocation::SPtr loc);
     bool addToList(BaseVector& output, int& kNeighbors, BaseLocation::SPtr loc);
-    
+
 
     void destroy();
   public:
@@ -37,7 +37,7 @@ class KDT
     //KDT() single element
     //KDT() empty
     void insert(BaseLocation::SPtr& input);
-    //void insert(vector) 
+    //void insert(vector)
     BaseVectorOfPairs find_nearest_neighbor(std::vector<double> & coordinate_vector, int& kNeighbors, bool& distance);
     BaseVector find_nearest_neighbor(std::vector<double> & coordinate_vector, int& kNeighbors);
     void preorder(Node::SPtr& root, std::ostream& os);
@@ -45,10 +45,10 @@ class KDT
     void inorder(Node::SPtr& root, std::ostream& os);
     void inorderDot(Node::SPtr& root, std::ostream& os);
     Node::SPtr& getRoot();
-/* 
+/*
 // copy constructor (always override default for safety, even if coincident)
 KDT(const KDT &arg)
-{ 
+{
      //root = std::move(arg.root);
      root = arg.root;
      numOfDimensions = arg.numOfDimensions;

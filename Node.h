@@ -9,12 +9,12 @@
 #endif
 
 
-class Node 
+class Node
 {
   friend class KDT;
   public: //Typedefs (have to be defined first)
     typedef std::shared_ptr<Node> SPtr;
-  private: 
+  private:
     // Data
     Node::SPtr left = NULL;
     Node::SPtr right = NULL;
