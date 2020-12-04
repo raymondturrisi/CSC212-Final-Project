@@ -1,0 +1,10 @@
+62 3 true true true
+8 14 true false true
+3 11 false true false
+21 5 true false false
+17 10 false false false
+20 14 false true false
+26 8 false true true
+4 16 true true true
+28 16 true true false
+23 17 true false false
