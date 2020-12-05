@@ -1,4 +1,11 @@
-# A Jupyter notebook for gathering and formatting location data using Yelp's API and Python
+
+
+# ------------------------------------------------------------------------
+# NOTE: No longer reflects the most up to date version of the .ipynb file.
+# ------------------------------------------------------------------------
+
+
+#A Jupyter notebook for gathering and formatting location data using Yelp's API and Python
 
 # Resources:
 # - Python 'requests' HTTP library, https://requests.readthedocs.io/en/master/
