@@ -9,7 +9,7 @@ BaseLocation::~BaseLocation()
 
 CoffeeShops::CoffeeShops(std::vector<double>& coords, std::vector<std::string>& extra, int& k)
 {
-    this->dimensions_data = coords;//makes a copy
+    this->dimensions_data = coords;//makes a copy as intended as coords data is a reference to a temp vector
     this->stars = std::stoi(extra[k*this->terms]);
     std::istringstream(extra[k*this->terms+1]) >> std::boolalpha >> this->public_bathroom;
     std::istringstream(extra[k*this->terms+2]) >> std::boolalpha >> this->free_wifi;
@@ -34,7 +34,7 @@ CoffeeShops::~CoffeeShops()
 
 PoliceStations::PoliceStations(std::vector<double>& coords, std::vector<std::string>& extra, int& k)
 {
-    this->dimensions_data = coords;//makes a copy
+    this->dimensions_data = coords;//makes a copy as intended as coords data is a reference to a temp vector
     std::istringstream(extra[k*this->terms]) >> std::boolalpha >> is_equiped;
     std::istringstream(extra[k*this->terms+1]) >> std::boolalpha >> k9;
     std::istringstream(extra[k*this->terms+2]) >> std::boolalpha >> swat;

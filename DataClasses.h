@@ -24,18 +24,16 @@ class BaseLocation//Abstract class
         BaseLocation() : terms(-1)
         { }
 
+        //Copy Constructor and assignment operator mainly for debugging
+
+        //Copy Constructor
         BaseLocation(const BaseLocation& other)
             : terms(other.terms)
         {
             dimensions_data = other.dimensions_data;
         }
 
- /*       BaseLocation(BaseLocation&& other)
-            : p{ other.p }
-        {
-            other.p = nullptr;
-        }*/
-
+        //Assignment Operator
         BaseLocation& operator=(const BaseLocation& other)
         {
             if (&other != this) {
@@ -45,15 +43,6 @@ class BaseLocation//Abstract class
             return *this;
         }
 
-        //BaseLocation& operator=(BaseLocation&& other)
-        //{
-        //    if (&other != this) {
-        //        delete p;
-        //        p = other.p;
-        //        other.p = nullptr;
-        //    }
-        //    return *this;
-        //}
 };
 
 class DefaultLocation : public BaseLocation
@@ -80,6 +69,9 @@ class CoffeeShops : public BaseLocation
         bool getFreeWifi();
         ~CoffeeShops();
 
+        //Copy Constructor and assignment operator mainly for debugging
+
+        //Copy Constructor
         CoffeeShops(const CoffeeShops& other)
             : BaseLocation(other)
         {
@@ -88,6 +80,7 @@ class CoffeeShops : public BaseLocation
             this->free_wifi = other.free_wifi;
         }
 
+        //Assignment Operator
         CoffeeShops& operator=(const CoffeeShops& other)
         {
             if (&other != this) {
@@ -118,6 +111,9 @@ class PoliceStations : public BaseLocation
         bool getSwat();
         ~PoliceStations();
 
+        //Copy Constructor and assignment operator mainly for debugging
+
+        //Copy Constructor
         PoliceStations(const PoliceStations& other)
             : BaseLocation(other)
         {
@@ -126,6 +122,7 @@ class PoliceStations : public BaseLocation
             this->swat = other.swat;
         }
 
+        //Assignment Operator
         PoliceStations& operator=(const PoliceStations& other)
         {
             if (&other != this) {

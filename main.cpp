@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
 
   //Printing the tree
   std::ostringstream oss;
-  test.inorderDot(test.getRoot(), oss);
+  test.inorder(test.getRoot(), oss);
   std::cout << oss.str() << std::endl;
 }
 
