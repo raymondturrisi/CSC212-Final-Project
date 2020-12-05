@@ -33,6 +33,7 @@ class KDT
 
     void destroy();
   public:
+<<<<<<< HEAD
     KDT(BaseVector& input_list, int& numOfDimensions);
     //KDT() single element
     //KDT() empty
@@ -53,6 +54,73 @@ KDT(const KDT &arg)
      root = arg.root;
      numOfDimensions = arg.numOfDimensions;
      findMedian = arg.findMedian;
+=======
+    KDT();
+    ~KDT();
+
+};
+
+// Note: These function definitions must be placed in the same file as the class
+// declaration, a restriction which occurs when using templated classes.
+
+// ------- Outline For Defining Methods on Templated Classes ---------
+// template<class |param1_name, ... , paramN_name|>
+// |return type| |class name|::|function name and params| { |code| }
+// -------------------------------------------------------------------
+
+template<class num_type, class specific_data>
+KDT<num_type, specific_data> KDT<num_type, specific_data>::insert(std::vector<Node<num_type, specific_data>> & input_list, int depth){
+
+  // **** Should this function be a recursive one? Yes. ****
+  // https://en.wikipedia.org/wiki/K-d_tree#Construction
+
+  // - This function constructs a KDTree when many input Nodes are available.
+  // - Selecting the points by always inserting the median in the current axis
+  //   keeps the tree more balanced, and keeps performance closer to O(logn).
+
+  // Select axis based on depth so that axis cycles through all valid values
+  int axis = depth % input_list[0].coordinate_vector.size();
+
+  // Sort Nodes list and choose median as pivot element
+
+  // Modify the input to be sorted based on the axis, and keep track of the median Node.
+  // The find_median() function hiddenly operates on the median_node_index variable.
+  int median_node_index = 0;
+  Node<num_type, specific_data> & median_node = this->find_median(input_list, axis, median_node_index);
+
+  // If this is the first node being inserted
+  if(!root){
+    this->root = median_node;
+    return;
+  }
+  else{
+    // Make left and right halves.
+    //
+    // Is it direly important that this functions in better than Theta(n) time?
+    // Does this perform in Theta(logn) times since the size of the list is always cut in half?
+    //
+    // When would this function ever come across a large enough sized list to cause
+    // it to take a longer than acceptable time to execute?
+    std::vector<Node<num_type, specific_data>> left_half = {};
+    std::vector<Node<num_type, specific_data>> right_half = {};
+
+    for(int i = 0; i < input_list; i++){
+      if(i < median_node_index){
+        left_half.append(input_list[i]);
+      }
+      else if(i > median_node_index){
+        right_half.append(input_list[i]);
+      }
+    }
+
+    // Construct subtrees with left and right halves recursively.
+    median_node.left_child = insert(left_half, depth + 1);
+    median_node.right_child = insert(right_half, depth + 1);
+
+    // Insert the median_node
+    return median_node;
+  }
+>>>>>>> d244cab7d8c25f6fc643fc80ec2ba0a85d7b7578
 }
 
 // copy assignment operator (member method, argument by constant reference) [5]p198
