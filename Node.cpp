@@ -4,7 +4,7 @@
 
 
 
-Node::Node(std::shared_ptr<BaseLocation> input)
+Node::Node(BaseLocation::SPtr input)
     : location(input)
 {
 }
