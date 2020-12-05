@@ -13,7 +13,7 @@ class BaseLocation//Abstract class
 
     public:
         std::vector<double> dimensions_data;
-        
+
     protected:
         int terms;
 

@@ -68,7 +68,7 @@ Node::SPtr KDT::insertDuringConstruct(BaseVector& input_list, Node::SPtr& root, 
 
   //Compute what the median index of the array should be
   //An even array selects the index skewed right
-  //ex {10,11,12,13} would select index 2 as size is 4, picking value 12 as median 
+  //ex {10,11,12,13} would select index 2 as size is 4, picking value 12 as median
   int medianIdx = floor(inputSize/2);
 
   //Resets the median of medians algorithm to operate on correct list and at the correct dimension
@@ -76,7 +76,7 @@ Node::SPtr KDT::insertDuringConstruct(BaseVector& input_list, Node::SPtr& root, 
 
   //Returns out the value of the median and reorders the list so all values less than median are placed to the left of the median and all values greater than to the right
   BaseLocation::SPtr median = findMedian.select(0,(inputSize-1),medianIdx);
-  
+
   //Places median value in node
   root = std::make_shared<Node>(median);
   numOfNodes++;
