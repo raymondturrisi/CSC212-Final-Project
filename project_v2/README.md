@@ -1,9 +1,9 @@
-#CSC 212 Final Project - KD Trees
-###Raymond Turrisi, Brennan Richards, Alfred Timperley
+# CSC 212 Final Project - KD Trees
+### Raymond Turrisi, Brennan Richards, Alfred Timperley
 
 <img src="./images/tree.png" alt="image" style="zoom:33%;" />
 
-##Overview
+## Overview
 Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brief description of KD Trees, the fundamental algorithms, theoretical run times, as well as some example implementations. The outline for this README.md is as follows.
 Markup :    1. Overview
                 1. Intro
@@ -31,10 +31,10 @@ Markup :    1. Overview
                 3. App 3
 
 
-##Design Objective
+## Design Objective
 
 
-##Methods
+## Methods
 
 Markup :    1. Constructors
 
@@ -43,11 +43,11 @@ Markup :    1. Constructors
             3. Destructors
 
 
-##Example Implementation
+## Example Implementation
 
-###Dependencies
+### Dependencies
 
-Markup :    1. One
+Markup :    1. Graphviz installation
 
             2. Two
 
