@@ -8,7 +8,8 @@
 #### *All References [] are with respect to the paper.
 
 <img src="./images/tree.png" alt="image" style="zoom:20%;" />
-<img src="./graphs/alcohols.csv.svg" alt="image" style="zoom:20%;" />
+
+<img src="./svgs/alcohols.csv.svg" alt="image" style="zoom:20%;" />
 
 ## Overview
 ### Table of Contents
