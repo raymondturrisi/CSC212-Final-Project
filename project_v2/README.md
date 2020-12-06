@@ -23,7 +23,7 @@ Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brie
     2. Dependencies
 3. Methods Included In <KDTree> Class
     1. Constructors
-2. Methods: <em>(return type) Function</em>
+2. Methods: (return type) Function
     1. (void) Insert
     2. (void) Remove Node
     3. (bool) Search
@@ -69,8 +69,8 @@ with data:
 
 The steps for insertion would proceed as follows:
 ~~~
--   Insert node (293,267) on depth <em>d</em> = 0 with iterator <em>i</em> = 0 as
-    <em>root</em>.
+-   Insert node (293,267) on depth d = 0 with iterator i = 0 as
+    root.
 
 -   Insert node (271,98) by checking the dimension belonging to the
     current iterator, such as on i = 0, compare K = x, where this
