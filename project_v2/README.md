@@ -5,6 +5,7 @@
 
 ## Overview
 Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brief description of KD Trees, the fundamental algorithms, theoretical run times, as well as some example implementations. The outline for this README.md is as follows.
+
 Markup : 1. Overview
          1. Intro
          2. Theory
