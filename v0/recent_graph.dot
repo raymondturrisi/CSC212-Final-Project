@@ -1,0 +1,26 @@
+digraph G {
+	subgraph cluster_0 {
+		<root: x> -> <1:y> -> <2:x> -> <3:y> -> <4:x> -> <5:y> -> <6:x> -> <7:y> -> <8:x>;
+	}
+	subgraph cluster_1 {
+		<Tow Truck Services: 41.78,-71.4384> ->	<Park Ave Auto Service: 41.7794,-71.4376>[color="black"]
+		<J & D Auto Salvage and Sales: 41.6967,-71.5203> ->	<Reliable Collision Repair: 41.7093,-71.5207>[color="bisque"]
+		<J & D Auto Salvage and Sales: 41.6967,-71.5203> ->	<Tow Truck Services: 41.78,-71.4384>[color="bisque"]
+		<EZ Glass & Tow: 41.8001,-71.4472> ->	<Matarese's Auto Repair: 41.8124,-71.45>[color="cadetblue"]
+		<Vasquez Electro Auto and Towing: 41.814,-71.4499> ->	<EZ Glass & Tow: 41.8001,-71.4472>[color="burlywood"]
+		<Banchwerks: 41.8194,-71.4217> ->	<All City Towing Services: 41.8038,-71.4346>[color="burlywood"]
+		<Banchwerks: 41.8194,-71.4217> ->	<BTS Tire & Service: 41.822,-71.4211>[color="burlywood"]
+		<Markos Auto Body Sales & Service: 41.8195,-71.4459> ->	<Vasquez Electro Auto and Towing: 41.814,-71.4499>[color="brown"]
+		<Markos Auto Body Sales & Service: 41.8195,-71.4459> ->	<Banchwerks: 41.8194,-71.4217>[color="brown"]
+		<State Towing Service: 41.8275,-71.4373> ->	<Markos Auto Body Sales & Service: 41.8195,-71.4459>[color="blueviolet"]
+		<Anthony's Auto Body: 41.8353,-71.4773> ->	<State Towing Service: 41.8275,-71.4373>[color="blue"]
+		<Barrett's Towing: 41.8547,-71.4122> ->	<Anthony's Auto Body: 41.8353,-71.4773>[color="black"]
+		<Barrett's Towing: 41.8547,-71.4122> ->	<Townline Service and Towing: 41.8592,-71.4473>[color="black"]
+		<Coastal Collision & Towing: 41.8595,-71.3973> ->	<Sterry Street Towing: 41.8981,-71.3449>[color="blue"]
+		<East Side Service Center: 41.8569,-71.3915> ->	<Coastal Collision & Towing: 41.8595,-71.3973>[color="black"]
+		<Sterry Street Towing: 41.8056,-71.4023> ->	<Barrett's Towing: 41.8547,-71.4122>[color="bisque"]
+		<Sterry Street Towing: 41.8056,-71.4023> ->	<East Side Service Center: 41.8569,-71.3915>[color="bisque"]
+		<Coletta's Garage: 41.7958,-71.4382> ->	<J & D Auto Salvage and Sales: 41.6967,-71.5203>[color="aquamarine"]
+		<Coletta's Garage: 41.7958,-71.4382> ->	<Sterry Street Towing: 41.8056,-71.4023>[color="aquamarine"]
+	
+}}
