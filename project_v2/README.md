@@ -77,7 +77,7 @@ The steps for insertion would proceed as follows:
     node will go to the left of the tested node.
 
 -   Insert node (372,260) by checking the dimension belonging to the
-    current iterator, such as on i = 0, compare K = x, where this
+    current iterator, such as on i = 1, compare K = y, where this
     node will go to the right of the tested node (271,98).
 
 -   Insert (337,156) by checking the dimension belonging to the current
