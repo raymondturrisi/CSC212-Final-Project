@@ -8,7 +8,6 @@
 #### *All References [] are with respect to the paper.
 
 <img src="./images/tree.png" alt="image" style="zoom:20%;" />
-Θ(n *log*<sub>2</sub> n).
 
 ## Overview
 ### Table of Contents
@@ -49,7 +48,7 @@ a multidimensional divide-and-conquer technique which decomposes a
 problem with *n* points within *K* dimensions [2]. A key feature of this
 data structure is that it allows the efficient tree traversal for an
 algorithm which finds the nearest neighbor between two nodes or a
-comparable location in $$Θ(n log_2 n).$$
+comparable location in <em>Θ(n Log<sub>2</sub> n)</em>.
 
 K-D trees are simple in nature, and are highly efficient for processing
 multi-dimensional keys. While they are very similar to a Binary Search
