@@ -96,6 +96,18 @@ With this, a 2-D tree with four nodes has been created as seen in the figure bel
 
 ### Theory
 
+<div id="tab:Velfs">
+
+| **Algorithm** | **Average**                   | **Worst Case** |
+|:--------------|:------------------------------|:---------------|
+| *Space*       | *Θ*(*n*)                      | *Θ*(*n*)       |
+| *Search*      | *Θ*(*l**o**g*<sub>2</sub>*n*) | *Θ*(*n*)       |
+| *Insert*      | *Θ*(*l**o**g*<sub>2</sub>*n*) | *Θ*(*n*)       |
+| *Delete*      | *Θ*(*l**o**g*<sub>2</sub>*n*) | *Θ*(*n*)       |
+
+Time and Space Complexity for Standard Functions
+
+</div>
 
 ## Design Objective
 
