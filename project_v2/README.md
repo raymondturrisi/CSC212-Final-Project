@@ -23,7 +23,7 @@ Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brie
     2. Dependencies
 3. Methods Included In <KDTree> Class
     1. Constructors
-2. Methods: **(return type) Function**
+2. Methods: _(return type) Function_
     1. (void) Insert
     2. (void) Remove Node
     3. (bool) Search
@@ -73,18 +73,18 @@ The steps for insertion would proceed as follows:
     *root*.
 
 -   Insert node (271,98) by checking the dimension belonging to the
-    current iterator, such as on **i** = 0, compare **K** = **x**, where this
+    current iterator, such as on _i_ = 0, compare _K_ = _x_, where this
     node will go to the left of the tested node.
 
 -   Insert node (372,260) by checking the dimension belonging to the
-    current iterator, such as on **i** = 0, compare **K** = **x**, where this
+    current iterator, such as on _i_ = 0, compare _K_ = _x_, where this
     node will go to the right of the tested node (271,98).
 
 -   Insert (337,156) by checking the dimension belonging to the current
-    iterator, such as on **i** = 0, compare **K** = **x**, where this node
+    iterator, such as on _i_ = 0, compare _K_ = _x_, where this node
     will go to the right of the tested node (271,98) being unto testing
-    against node (372,260). Now, **i** = 1 which belongs to the second
-    dimension **y**, where 156 &lt; 260, where now node (337,156) will be
+    against node (372,260). Now, _i_ = 1 which belongs to the second
+    dimension _y_, where 156 &lt; 260, where now node (337,156) will be
     the left child of (372,260).
 ~~~
 
