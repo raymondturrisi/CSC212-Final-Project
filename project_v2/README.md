@@ -23,7 +23,7 @@ Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brie
     2. Dependencies
 3. Methods Included In <KDTree> Class
     1. Constructors
-2. Methods: (return type) Function
+2. Methods: <em>(return type) Function</em>
     1. (void) Insert
     2. (void) Remove Node
     3. (bool) Search
@@ -32,7 +32,7 @@ Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brie
     6. (void) Print Post Order
     7. (void) Print In Order
     8. (void) Print Pre Order
-    9. (void*) Print Graph.dot & Graph.svg (writes to files)
+    9. (void) Print Graph.dot & Graph.svg (writes to files)
 4. Example Implementations
     1. App 1
     2. App 2
@@ -69,8 +69,8 @@ with data:
 
 The steps for insertion would proceed as follows:
 ~~~
--   Insert node (293,267) on depth *d* = 0 with iterator *i* = 0 as
-    *root*.
+-   Insert node (293,267) on depth <em>d</em> = 0 with iterator <em>i</em> = 0 as
+    <em>root</em>.
 
 -   Insert node (271,98) by checking the dimension belonging to the
     current iterator, such as on i = 0, compare K = x, where this
@@ -84,7 +84,7 @@ The steps for insertion would proceed as follows:
     iterator, such as on i = 0, compare K = x, where this node
     will go to the right of the tested node (271,98) being unto testing
     against node (372,260). Now, i = 1 which belongs to the second
-    dimension y, where 156 &lt; 260, where now node (337,156) will be
+    dimension y, where 156 < 260, where now node (337,156) will be
     the left child of (372,260).
 ~~~
 
