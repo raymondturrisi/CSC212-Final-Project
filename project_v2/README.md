@@ -23,7 +23,7 @@ Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brie
     2. Dependencies
 3. Methods Included In <KDTree> Class
     1. Constructors
-2. Methods: *(return type) Function*
+2. Methods: **(return type) Function**
     1. (void) Insert
     2. (void) Remove Node
     3. (bool) Search
@@ -48,7 +48,7 @@ a multidimensional divide-and-conquer technique which decomposes a
 problem with *n* points within *K* dimensions [2]. A key feature of this
 data structure is that it allows the efficient tree traversal for an
 algorithm which finds the nearest neighbor between two nodes or a
-comparable location in *Θ*(*n**l**o**g*<sub>2</sub>*n*).
+comparable location in *Θ*(*n$\times$log*<sub>2</sub>*n*).
 
 K-D trees are simple in nature, and are highly efficient for processing
 multi-dimensional keys. While they are very similar to a Binary Search
@@ -59,7 +59,7 @@ node, and this is done by tracking its depth, *d*, in a tree, and a
 *discriminator*, *i* [3]. Recursive functions identify the *type* of level
 they are on with this discriminator, where:
 
-*i* = *d*%*K*,  *i* ∈ \[0, *K*\]
+*i* = *d*%*K*,  *i* ∈ \[0, *K*\)
 
 For example, take two dimensional data represented by traditional *x*
 and *y*, with discriminators 0 and 1 respectively, across three levels
@@ -73,18 +73,18 @@ The steps for insertion would proceed as follows:
     *root*.
 
 -   Insert node (271,98) by checking the dimension belonging to the
-    current iterator, such as on *i* = 0, compare *K* = *x*, where this
+    current iterator, such as on **i** = 0, compare **K** = **x**, where this
     node will go to the left of the tested node.
 
 -   Insert node (372,260) by checking the dimension belonging to the
-    current iterator, such as on *i* = 0, compare *K* = *x*, where this
+    current iterator, such as on **i** = 0, compare **K** = **x**, where this
     node will go to the right of the tested node (271,98).
 
 -   Insert (337,156) by checking the dimension belonging to the current
-    iterator, such as on *i* = 0, compare *K* = *x*, where this node
+    iterator, such as on **i** = 0, compare **K** = **x**, where this node
     will go to the right of the tested node (271,98) being unto testing
-    against node (372,260). Now, *i* = 1 which belongs to the second
-    dimension *y*, where 156 &lt; 260, where now node (337,156) will be
+    against node (372,260). Now, **i** = 1 which belongs to the second
+    dimension **y**, where 156 &lt; 260, where now node (337,156) will be
     the left child of (372,260).
 ~~~
 
