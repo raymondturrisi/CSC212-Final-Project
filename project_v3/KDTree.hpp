@@ -325,7 +325,7 @@ class KDTree {
         }
         */
 
-        void nearest_neighbor_oftype_r(Node<t>* node, t &data, std::string wanted_type, t &result, unsigned int depth_r, double &best_dist);/*
+        void nearest_neighbor_oftype_r(Node<t>* node, t &data, std::string wanted_type, t *result, unsigned int depth_r, double &best_dist);/*
         {
             Recursively iterates through tree looking for the nearest neighbor of a particular type, in order to return the class, it has to track both the resulting class object and the best distance
             When the current distance between the nodes data and the passed data is less than the best data, sets a new best distances and copies the nodes data into the result
@@ -440,7 +440,7 @@ Node<t>* KDTree<t>::insert_r(Node<t>* node, t data, unsigned int depth_r) {
         insert_r(node->right_child, data, depth_r+1);
     } else {
         if(!node->left_child) {
-            this-nodes++;
+            this->nodes++;
             node->left_child = new Node<t>(data);
             return node->left_child;
         }
@@ -614,7 +614,7 @@ t KDTree<t>::nearest_neighbor(std::vector<double> local_coords, double &best_dis
 //of type
 //from class
 template <typename t>
-void KDTree<t>::nearest_neighbor_oftype_r(Node<t>* node, t &data, std::string wanted_type, t &result, unsigned int depth_r, double &best_dist) {
+void KDTree<t>::nearest_neighbor_oftype_r(Node<t>* node, t &data, std::string wanted_type, t* result, unsigned int depth_r, double &best_dist) {
 
     int i = depth_r%(this->dimensions);
 
@@ -626,7 +626,8 @@ void KDTree<t>::nearest_neighbor_oftype_r(Node<t>* node, t &data, std::string wa
 
             if((best_dist > dist) && (node->struct_of_data != data) && (node->struct_of_data.type == wanted_type)) {
                 best_dist = dist;
-                result = node->struct_of_data;
+                (*result) = node->struct_of_data;
+                //std::cout << "Found a best\n";
             }
 
             return;
@@ -640,7 +641,8 @@ void KDTree<t>::nearest_neighbor_oftype_r(Node<t>* node, t &data, std::string wa
 
             if(best_dist >= dist && node->struct_of_data != data && (node->struct_of_data.type == wanted_type)) {
                 best_dist = dist;
-                result = node->struct_of_data;
+                (*result) = node->struct_of_data;
+                //std::cout << "Found a best\n";
 
             }
 
@@ -652,7 +654,9 @@ void KDTree<t>::nearest_neighbor_oftype_r(Node<t>* node, t &data, std::string wa
 
     if(best_dist > dist && node->struct_of_data != data  && (node->struct_of_data.type == wanted_type)) {
         best_dist = dist;
-        result = node->struct_of_data;
+        (*result) = node->struct_of_data;
+        std::cout << "Found a best\n";
+
     }
     return;
 }
@@ -662,8 +666,10 @@ template <typename t>
 t KDTree<t>::nearest_neighbor_oftype(t data, std::string wanted_type) {
     t result(this->dimensions);
     double best_dist = DBL_MAXT; // << literally the worst case
+
     nearest_neighbor_oftype_r(this->head, data, wanted_type, result, 0, best_dist);
     //std::cout << best_dist*88 << std::endl; //to miles
+    //std::cout << "Result name = " << *result.name << std::endl;
     return result;
 }
 
@@ -677,14 +683,14 @@ t KDTree<t>::nearest_neighbor_oftype(t data, std::string wanted_type, double &be
 //from class
 template <typename t>
 t KDTree<t>::nearest_neighbor_oftype(std::vector<double> local_coords, std::string wanted_type) {
-    t result;
-    t data;
+    t * result;
+    t data(this->dimensions);
     for(int i = 0; i <local_coords.size(); i++){
-        data.coords.push_back(local_coords[i]);
+        data.coords[i] = local_coords[i];
     }
     double best_dist = DBL_MAXT; // << literally the worst case
     nearest_neighbor_oftype_r(this->head, data, wanted_type, result, 0, best_dist);
-    return result;
+    return (*result);
 }
 
 //from class
