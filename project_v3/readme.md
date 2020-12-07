@@ -101,13 +101,11 @@ With this, a 2-D tree with four nodes has been created as seen in the figure bel
 
 
 ## Methods
-
+<img src="./matlab/NN_video.mp4" alt="image" style="zoom:20%;" />
 ~~~
 1. Constructors
 
 2. Methods
-
-<img src="./matlab/NN_video.mp4" alt="image" style="zoom:20%;" />
 
 3. Destructors
 ~~~
