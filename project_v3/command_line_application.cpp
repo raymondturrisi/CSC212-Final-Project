@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include <map>
-
+#include <chrono>
 // Custom classes
 #include "KDTree.hpp"
 #include "dataStructs.hpp"
@@ -83,7 +83,7 @@ int main(int argc, char *args[]) {
               << "2-Automotive (repair)"
               << "3-Banks\n"
               << "4-Barber shops\n"
-              << "5-Coffee shops"
+              << "5-Coffee shops\n"
               << "6-Hiking spots\n"
               << "7-Hotels\n"
               << "8-Landscapers\n"

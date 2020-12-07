@@ -664,7 +664,7 @@ void KDTree<t>::nearest_neighbor_oftype_r(Node<t>* node, t &data, std::string wa
 //from class
 template <typename t>
 t KDTree<t>::nearest_neighbor_oftype(t data, std::string wanted_type) {
-    t result(this->dimensions);
+    t * result;
     double best_dist = DBL_MAXT; // << literally the worst case
 
     nearest_neighbor_oftype_r(this->head, data, wanted_type, result, 0, best_dist);
@@ -675,9 +675,9 @@ t KDTree<t>::nearest_neighbor_oftype(t data, std::string wanted_type) {
 
 template <typename t>
 t KDTree<t>::nearest_neighbor_oftype(t data, std::string wanted_type, double &best_dist) {
-    t result(this->dimensions);
+    t * result;
     nearest_neighbor_oftype_r(this->head, data, wanted_type, result, 0, best_dist);
-    return result;
+    return (*result);
 }
 
 //from class
@@ -696,7 +696,7 @@ t KDTree<t>::nearest_neighbor_oftype(std::vector<double> local_coords, std::stri
 //from class
 template <typename t>
 t KDTree<t>::nearest_neighbor_oftype(std::vector<double> local_coords, std::string wanted_type, double &best_dist) {
-    t result;
+    t * result;
     t data;
     for(int i = 0; i <local_coords.size(); i++){
         data.coords.push_back(local_coords[i]);
