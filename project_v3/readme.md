@@ -101,7 +101,7 @@ With this, a 2-D tree with four nodes has been created as seen in the figure bel
 
 
 ## Methods
-<img src="./matlab/NN_gif.gif" alt="image" style="zoom:20%;" />
+<img src="./matlab/NN_gif.gif" alt="image" width="400" />
 ~~~
 1. Constructors
 
