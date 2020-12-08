@@ -9,8 +9,6 @@
 
 <img src="./media/tree.png" alt="image" style="zoom:20%;" />
 
-<img src="./media/example1.png" alt="image" style="zoom:20%;" />
-
 ## Overview
 ### Table of Contents
 Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brief description of KD Trees, the fundamental algorithms, theoretical run times, as well as some example implementations, with more information on this project in the submitted paper. The outline for this README.md is as follows.
