@@ -9,7 +9,7 @@
 
 <img src="./media/tree.png" alt="image" style="zoom:20%;" />
 
-<img src="./media/alcohols.csvsmall.svg" alt="image" style="zoom:20%;" />
+<img src="./media/example1.png" alt="image" style="zoom:20%;" />
 
 ## Overview
 ### Table of Contents
