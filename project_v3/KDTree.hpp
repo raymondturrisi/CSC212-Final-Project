@@ -7,11 +7,6 @@
     <THIS FILE>
     Templated class, where class declaration is at the top of the file, and the definitions are at the bottom of this file - must be kept together to avoid conflicts in templated classes
 
-    <KDTree.hpp>
-        /*.hpp
-        /*.cpp
-    </KDTree.hpp>
-
 */
 
 #ifndef KDTREE_CLASS
@@ -440,7 +435,7 @@ Node<t>* KDTree<t>::insert_r(Node<t>* node, t data, unsigned int depth_r) {
         insert_r(node->right_child, data, depth_r+1);
     } else {
         if(!node->left_child) {
-            this-nodes++;
+            this->nodes++;
             node->left_child = new Node<t>(data);
             return node->left_child;
         }
