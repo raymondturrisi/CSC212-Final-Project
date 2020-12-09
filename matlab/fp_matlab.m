@@ -15,13 +15,54 @@ figs = []; k = 1;
 
 
 dat = importdata("dat1.txt");
-
 dat_r = importdata("dat1_rleaning.txt");
 dat3d = importdata("dat3d.txt");
 dat_3d_moving = importdata("dat_3d_moving.txt");
 
-%plots data from left leaning tree
+dat_insertions = importdata("dat_insertions.txt");
+dat_searches = importdata("dat_searches.txt");
+dat_blsearches = importdata("dat_balanced_searches.txt");
 
+dat_insertions = sortrows(dat_insertions,1);
+dat_searches = sortrows(dat_searches,1);
+dat_blsearches = sortrows(dat_blsearches,1);
+
+logn_t = @(n,c)(c()*log(n));
+
+
+
+figs = [figs, figure(k)]; k = k+1;
+d = polyfit(dat_insertions(:,1),dat_insertions(:,2), 4);
+scatter(dat_insertions(1:2:end,1),dat_insertions(1:2:end,2), 'rx')
+hold on
+g = polyval(d,dat_insertions(:,1));
+exp_plots = [exp_plots,plot(dat_insertions(:,1),g, 'LineWidth', 1)];
+title("Insertions");
+grid on
+xlabs = [xlabs,xlabel("n")];ylabs = [ylabs,ylabel("Time (s)")];
+axes = [axes,gca];
+
+legs = [legs, legend('Data Points', 'Fourth order fit')]
+
+figs = [figs, figure(k)]; k = k+1;
+d = polyfit(dat_searches(:,1),dat_searches(:,2), 4);
+scatter(dat_searches(1:2:end,1),dat_searches(1:2:end,2), 'rx')
+hold on
+g = polyval(d,dat_searches(:,1));
+exp_plots = [exp_plots,plot(dat_searches(:,1),g, 'LineWidth', 1, 'Color', 'r')];
+title("Searches");
+grid on
+xlabs = [xlabs,xlabel("n")];ylabs = [ylabs,ylabel("Time (s)")];
+axes = [axes,gca];
+
+scatter(dat_blsearches(1:2:end,1),dat_blsearches(1:2:end,2), 'bx')
+hold on
+g = polyval(d,dat_blsearches(:,1));
+exp_plots = [exp_plots,plot(dat_blsearches(:,1),g, 'LineWidth', 1, 'Color', 'b')];
+grid on
+legs = [legs, legend('UB - Data Points', 'UB - Fourth order fit', 'B - Data Points', 'B - Fourth order fit')]
+
+%plots data from left leaning tree
 figs = [figs, figure(k)]; k = k+1;
 scatter(dat(:,1),dat(:,2));
 hold on
@@ -123,7 +164,7 @@ for p = 1:2:size(dat_3d_moving,1)
     hold on
     scatter3(dat_3d_moving(p,1),dat_3d_moving(p,2),dat_3d_moving(p,3),20,...
         'MarkerEdgeColor','k',...
-        'MarkerFaceColor',[1 .6 .6]);
+        'MarkerFaceColor',[0.6 1 .6]);
     plot3([dat_3d_moving(p,1) dat_3d_moving(p,4)],[dat_3d_moving(p,2) dat_3d_moving(p,5)],[dat_3d_moving(p,3) dat_3d_moving(p,6)], 'LineWidth', 3);
     dat_3d_moving(p,1:3)
     title("Moving Point")
@@ -148,6 +189,42 @@ for p = 1:2:size(dat_3d_moving,1)
     hold off
 end
 
+pause(3)
+%plots data from 3d tree, moving
+h = figure(402);
+axis vis3d
+filename = 'testAnimated.gif';
+for p = 1:2:size(dat_3d_moving,1)    
+
+    scatter(dat3d(1:2:end,1),dat3d(1:2:end,2),20,...
+        'MarkerEdgeColor','k',...
+        'MarkerFaceColor',[1 0.6 0.6]);
+    hold on
+    scatter(dat_3d_moving(p,1),dat_3d_moving(p,2),20,...
+        'MarkerEdgeColor','k',...
+        'MarkerFaceColor',[0.6 1 0.6]);
+    plot([dat_3d_moving(p,1) dat_3d_moving(p,4)],[dat_3d_moving(p,2) dat_3d_moving(p,5)], 'LineWidth', 3);
+    title("Moving Point")
+    grid on
+    xlabel("X");ylabel("Y");
+    xlim([-120,120]);ylim([-120,120]);
+    
+    pause(0.05)
+    
+    drawnow
+    frame = getframe(h); 
+    im = frame2im(frame); 
+    [imind,cm] = rgb2ind(im,256); 
+    if p == 1 
+      imwrite(imind,cm,filename,'gif', 'Loopcount',inf); 
+    else 
+      imwrite(imind,cm,filename,'gif','WriteMode','append'); 
+    end 
+    hold off
+end
+
+
+%}
 %%Aesthetics for all plots - takes handles on figure objects, modifies them
 %%accordingly to be consistent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
