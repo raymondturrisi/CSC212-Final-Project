@@ -146,8 +146,8 @@ void get_user_choice(std::vector<double> & long_lat_vect, int & desired_location
 
   // Longitude, latitude
 
-  long_lat_vect.push_back(longitude);
   long_lat_vect.push_back(latitude);
+  long_lat_vect.push_back(longitude);
 
 };
 

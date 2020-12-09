@@ -7,11 +7,6 @@
     <THIS FILE>
     Templated class, where class declaration is at the top of the file, and the definitions are at the bottom of this file - must be kept together to avoid conflicts in templated classes
 
-    <KDTree.hpp>
-        /*.hpp
-        /*.cpp
-    </KDTree.hpp>
-
 */
 
 #ifndef KDTREE_CLASS
@@ -590,7 +585,7 @@ Node<t>* KDTree<t>::insert_r(Node<t>* node, t data, unsigned int depth_r) {
         insert_r(node->right_child, data, depth_r+1);
     } else {
         if(!node->left_child) {
-            this-nodes++;
+            this->nodes++;
             node->left_child = new Node<t>(data);
             return node->left_child;
         }
@@ -887,7 +882,7 @@ void KDTree<t>::nearest_neighbor_oftype_rbest(Node<t>* node, t &data, std::strin
     nearest_neighbor_oftype_rbest(node->right_child, data, wanted_type, result, depth_r+1, best_dist);
     nearest_neighbor_oftype_rbest(node->left_child, data, wanted_type, result, depth_r+1, best_dist);
     double dist = dist_from_to(data, node);
-    if (dist != 0 && best_dist > dist) {
+    if (dist != 0 && best_dist > dist && (node->struct_of_data != data && (node->struct_of_data.type == wanted_type))) {
         best_dist = dist;
         result = node->struct_of_data;
     }
