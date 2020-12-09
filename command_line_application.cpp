@@ -8,6 +8,7 @@
 #include <limits.h>
 #include <map>
 #include <typeinfo>
+#include <chrono>
 // Custom classes
 #include "KDTree.hpp"
 #include "dataStructs.hpp"
