@@ -39,7 +39,21 @@ Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brie
 3. App 3
 ~~~
 
-### Using our code
+### Using our application
+
+Our application code lives in the 'command_line_application.cpp' file.
+
+## Compiling
+Compile the code with the following command: g++ command_line_application.cpp -std=c++11 -o main.
+
+## Running
+Start the application with './main'. After running, you will be prompted to enter a longitude, latitude and a choice for a location type from a list like so:
+
+<img src="./media/CSC212-Final-Project-Demo.png" alt="image" style="zoom:20%;" />
+
+
+## Demonstration
+Click below to watch a demonstration video for running our command line application.
 
 [![Application Demonstration](./media/video-thumbnail.png)](https://youtu.be/v1EXNSsBulI)
 
