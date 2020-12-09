@@ -21,7 +21,7 @@ Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brie
 3. Methods Included In <KDTree> Class
     1. Constructors
     2. Methods: (return type) Function
-    3. Destruc
+    3. Destructors
 4. Using the application
     1. Compiling
     2. Running
