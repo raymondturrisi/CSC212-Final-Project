@@ -41,7 +41,7 @@ Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brie
 
 ### Using our code
 
-[![Application Demonstration](https://img.youtu.be/v1EXNSsBulI)](https://youtu.be/v1EXNSsBulI)
+[![Application Demonstration](./media/video-thumbnail.png)](https://youtu.be/v1EXNSsBulI)
 
 ### Introduction to KD Trees
 The K-D tree is a multidimensional BST which was first created in 1975
