@@ -96,13 +96,51 @@ One realization at the onset of the project, is that there were not many impleme
 ## Methods
 This code comes ready with the following features: inserts, searches, nearest neighbors searches, and a constructor which takes a vector of pointers and builds a balanced K-D tree of K dimensions. In addition to these fundamental methods, there are several more which is unique to our teams application. 
 ~~~
+Template <t>
 1. Constructors
-    1. `KDTree<t>(unsigned int _dimensions)`
+    1. KDTree<t>(unsigned int _dimensions)
+        - Builds a tree with the number of specified dimensions. 
+    2. KDTree<t>(t data)
+        - Builds a tree with one instance of data (as root). 
+    3. KDTree<t>(std::vector<t*> vector_of_structs, unsigned int _dimensions)
+        - Creates a balanced KD tree with a Median of Medians algorithm. 
 2. Methods
-
+    1. void insert(t data)
+        - Inserts a new node into the tree. 
+    2. bool search_for_element(t data)
+        - Returns of an element exists in a tree. 
+    3. t nearest_neighbor(t data)
+        - Finds the nearest neighbor in a tree of a passed class and returns a copy of the nearest class, with an average time of O(logN).
+    4. t nearest_neighbor(t data, double &best_distance)
+        - Finds the nearest neighbor in a tree of a passed class and returns a copy of the nearest class, and the distance between them, with an average time of O(logN).
+    5. t nearest_neighbor(std::vector<double> local_coords)
+        - Finds the nearest neighbor in a tree of passed coordinates and returns a copy of the nearest class, with an average time of O(logN).
+    6. t nearest_neighbor(std::vector<double> local_coords, double &best_distance)
+        - Finds the nearest neighbor in a tree of passed coorindates and returns a copy of the nearest class, and the distance between them, with an average time of O(logN).
+    7. t nearest_neighbor_best(t data)
+        - Same as above, but in O(n) time and returns the guaranteed closest neighbor. 
+    8. t nearest_neighbor_best(t data, double &best_distance)
+    9. t nearest_neighbor_best(std::vector<double> local_coords)
+    10. t nearest_neighbor_best(std::vector<double> local_coords, double &best_distance)
+    12. void postOrder()
+        - Prints post order notation.
+    13. void inOrder()
+        - Prints in order notation.
+    14. void preOrder()
+        - Prints pre order notation. 
+    15. void dotOut(std::string fname_out)
+        - Returns a recent_graph.dot file into the working directory, in addition to generating an .svg named the passed file name. 
 3. Destructors
+    1. void destroy()
+        - Resets tree as if it was called with constructor 1.1.
 ~~~
-In the future, a further study of K-D Trees will take place where 
+In the future, a further study of K-D Trees will take place. Here, we would like to add ranging finding algorithms, nearest query algorithms, and other utilities which may prove useful in an implementation of a class of this style. 
+
+### Dependencies
+~~~
+1. Graphviz installation
+    - In order to run the dotOut function, you must have graphviz installed locally, or you can comment out cmd2 in KDTree.hpp to still return the recent_graph.dot file. 
+    - To install, run   << sudo apt-get install graphviz >>.
 
 ## Using the application
 
@@ -120,10 +158,3 @@ Start the application with './main'. After running, you will be prompted to ente
 Click below to watch a demonstration video for running our command line application.
 
 [![Application Demonstration](./media/video-thumbnail.png)](https://youtu.be/v1EXNSsBulI)
-
-### Dependencies
-~~~
-1. Graphviz installation
-
-2. Two
-~~~
