@@ -33,10 +33,9 @@ Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brie
     7. (void) Print In Order
     8. (void) Print Pre Order
     9. (void) Print Graph.dot & Graph.svg (writes to files)
-4. Example Implementations
+4. Running the Application
     1. App 1
     2. App 2
-3. App 3
 ~~~
 
 ### Introduction to KD Trees
@@ -108,7 +107,22 @@ With this, a 2-D tree with four nodes has been created as seen in the figure bel
 3. Destructors
 ~~~
 
-## Example Implementation
+## Using the application
+
+Our application code lives in the 'command_line_application.cpp' file.
+
+## Compiling
+Compile the code with the following command: g++ command_line_application.cpp -std=c++11 -o main.
+
+## Running
+Start the application with './main'. After running, you will be prompted to enter a longitude, latitude and a choice for a location type from a list like so:
+
+<img src="./media/CSC212-Final-Project-Demo.png" alt="image" style="zoom:20%;" />
+
+## Demonstration
+Click below to watch a demonstration video for running our command line application.
+
+[![Application Demonstration](./media/video-thumbnail.png)](https://youtu.be/v1EXNSsBulI)
 
 ### Dependencies
 ~~~
@@ -116,8 +130,3 @@ With this, a 2-D tree with four nodes has been created as seen in the figure bel
 
 2. Two
 ~~~
-### App 1
-
-### App 2
-
-### App 3
