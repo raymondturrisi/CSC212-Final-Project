@@ -21,15 +21,7 @@ Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brie
 3. Methods Included In <KDTree> Class
     1. Constructors
     2. Methods: (return type) Function
-        1. (void) Insert
-        2. (void) Remove Node
-        3. (bool) Search
-        4. (<Template Class>) Nearest Neighbor
-        5. (void) Destroy Tree
-        6. (void) Print Post Order
-        7. (void) Print In Order
-        8. (void) Print Pre Order
-        9. (void) Print Graph.dot & Graph.svg (writes to files)
+    3. Destruc
 4. Using the application
     1. Compiling
     2. Running
@@ -141,7 +133,7 @@ In the future, a further study of K-D Trees will take place. Here, we would like
 1. Graphviz installation
     - In order to run the dotOut function, you must have graphviz installed locally, or you can comment out cmd2 in KDTree.hpp to still return the recent_graph.dot file. 
     - To install, run   << sudo apt-get install graphviz >>.
-
+~~~
 ## Using the application
 
 Our application code lives in the 'command_line_application.cpp' file.
