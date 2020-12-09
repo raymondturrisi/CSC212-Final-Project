@@ -73,10 +73,10 @@ int main(int argc, char *args[]) {
 
     // Sample command line input
     // long, lat, type
-    // -71.703110 41.970250 5
-    // -71.55395507812501 41.48389104267175 7
+    // URI coffee shop command line input: -71.5258 41.48071 5
+    // Providence hotels command line input: -71.4128 41.824 7
 
-    DefaultLocation nearest = tree.nearest_neighbor_oftype(long_lat_coords, desired_location_type);
+    DefaultLocation nearest = tree.nearest_neighbor_oftype_best(long_lat_coords, desired_location_type);
 
     std::cout << "\n\n---------------Result--------------\n";
     std::cout << "Name: " << nearest.name << std::endl << std::endl << "City: " << nearest.city << std::endl << std::endl
@@ -143,6 +143,8 @@ void get_user_choice(std::vector<double> & long_lat_vect, int & desired_location
     }
 
   }
+
+  // Longitude, latitude
 
   long_lat_vect.push_back(longitude);
   long_lat_vect.push_back(latitude);
