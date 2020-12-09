@@ -18,6 +18,7 @@ dat = importdata("dat1.txt");
 
 dat_r = importdata("dat1_rleaning.txt");
 dat3d = importdata("dat3d.txt");
+dat_3d_moving = importdata("dat_3d_moving.txt");
 
 %plots data from left leaning tree
 
@@ -103,9 +104,49 @@ end
 
 title("3D Right Leaning Tree")
 grid on
-xlabs = [xlabs,xlabel("X")];ylabs = [ylabs,ylabel("Y")];zlabs = [zlabs,ylabel("Z")];
+xlabs = [xlabs,xlabel("X")];ylabs = [ylabs,ylabel("Y")];zlabs = [zlabs,zlabel("Z")];
 xlim([-120,120]);ylim([-120,120]);zlim([-120,120]);
 axes = [axes,gca];
+
+pause(3)
+%plots data from 3d tree, moving
+h = figure(402);
+axis vis3d
+filename = 'testAnimated.gif';
+for p = 1:2:size(dat_3d_moving,1)
+    rotate3d('on')
+    
+
+    scatter3(dat3d(1:2:end,1),dat3d(1:2:end,2),dat3d(1:2:end,3),20,...
+        'MarkerEdgeColor','k',...
+        'MarkerFaceColor',[1 .6 .6]);
+    hold on
+    scatter3(dat_3d_moving(p,1),dat_3d_moving(p,2),dat_3d_moving(p,3),20,...
+        'MarkerEdgeColor','k',...
+        'MarkerFaceColor',[1 .6 .6]);
+    plot3([dat_3d_moving(p,1) dat_3d_moving(p,4)],[dat_3d_moving(p,2) dat_3d_moving(p,5)],[dat_3d_moving(p,3) dat_3d_moving(p,6)], 'LineWidth', 3);
+    dat_3d_moving(p,1:3)
+    title("Moving Point")
+    grid on
+    xlabel("X");ylabel("Y");zlabel("Z");
+    xlim([-120,120]);ylim([-120,120]);zlim([-120,120]);
+    
+    az = p;
+    el = 45;
+    view([az,el])
+    pause(0.05)
+    
+    drawnow
+    frame = getframe(h); 
+    im = frame2im(frame); 
+    [imind,cm] = rgb2ind(im,256); 
+    if p == 1 
+      imwrite(imind,cm,filename,'gif', 'Loopcount',inf); 
+    else 
+      imwrite(imind,cm,filename,'gif','WriteMode','append'); 
+    end 
+    hold off
+end
 
 %%Aesthetics for all plots - takes handles on figure objects, modifies them
 %%accordingly to be consistent
@@ -143,4 +184,4 @@ end
 viewAngles = [-20,10;-110,10;-190,30;-290,10;-380,10];
 %daspect([1,1,.3]);
 OptionZ.FrameRate=20;OptionZ.Duration=10;OptionZ.Periodic=true;
-CaptureFigVid(viewAngles,'WellMadeVid',OptionZ)
+%CaptureFigVid(viewAngles,'WellMadeVid',OptionZ)
