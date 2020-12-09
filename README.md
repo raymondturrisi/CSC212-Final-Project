@@ -97,7 +97,7 @@ One realization at the onset of the project, is that there were not many impleme
 This code comes ready with the following features: inserts, searches, nearest neighbors searches, and a constructor which takes a vector of pointers and builds a balanced K-D tree of K dimensions. In addition to these fundamental methods, there are several more which is unique to our teams application. 
 ~~~
 1. Constructors
-    1. 'KDTree<t>(unsigned int _dimensions)'
+    1. `KDTree<t>(unsigned int _dimensions)`
 2. Methods
 
 3. Destructors
