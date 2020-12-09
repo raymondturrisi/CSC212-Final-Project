@@ -15,27 +15,25 @@ Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brie
 
 ~~~
 1. Overview
-    1. Table of Contents
-    2. Intro
-    3. Theory
 2. Design Objective
     1. Modularity (Fully Templated)
     2. Dependencies
 3. Methods Included In <KDTree> Class
     1. Constructors
-2. Methods: (return type) Function
-    1. (void) Insert
-    2. (void) Remove Node
-    3. (bool) Search
-    4. (<Template Class>) Nearest Neighbor
-    5. (void) Destroy Tree
-    6. (void) Print Post Order
-    7. (void) Print In Order
-    8. (void) Print Pre Order
-    9. (void) Print Graph.dot & Graph.svg (writes to files)
-4. Running the Application
-    1. App 1
-    2. App 2
+    2. Methods: (return type) Function
+        1. (void) Insert
+        2. (void) Remove Node
+        3. (bool) Search
+        4. (<Template Class>) Nearest Neighbor
+        5. (void) Destroy Tree
+        6. (void) Print Post Order
+        7. (void) Print In Order
+        8. (void) Print Pre Order
+        9. (void) Print Graph.dot & Graph.svg (writes to files)
+4. Using the application
+    1. Compiling
+    2. Running
+    3. Demonstration
 ~~~
 
 ### Introduction to KD Trees
@@ -91,35 +89,34 @@ With this, a 2-D tree with four nodes has been created as seen in the figure bel
 
 <img src="./media/example1.png" alt="image" style="zoom:20%;" />
 
-### Theory
-
-
 ## Design Objective
-
+The an additional goal of this groups work was to develop highly modular code, making the class entirely templated with as minimal dependencies as possible in order to get the fundamental benefits if tied to another class for another application. With this class being templated, it only assumes that dimentional data, such as cartesian coordinates, are stored in a standard template vector of doubles, which in its current version the class accesses as "coords", but this can be easily adopted.
+One realization at the onset of the project, is that there were not many implementations of K-D Trees available online which we would compare our implementations to, where putting in the additional effort into the project and creating a base version which could be found and used by others would be ideal. The other thought was that the group may continue to develop the code into becoming more functional and efficient in the near future.
 
 ## Methods
-
+This code comes ready with the following features: inserts, searches, nearest neighbors searches, and a constructor which takes a vector of pointers and builds a balanced K-D tree of K dimensions. In addition to these fundamental methods, there are several more which is unique to our teams application. 
 ~~~
 1. Constructors
-
+    1. 'KDTree<t>(unsigned int _dimensions)'
 2. Methods
 
 3. Destructors
 ~~~
+In the future, a further study of K-D Trees will take place where 
 
 ## Using the application
 
 Our application code lives in the 'command_line_application.cpp' file.
 
-## Compiling
+### Compiling
 Compile the code with the following command: g++ command_line_application.cpp -std=c++11 -o main.
 
-## Running
+### Running
 Start the application with './main'. After running, you will be prompted to enter a longitude, latitude and a choice for a location type from a list like so:
 
 <img src="./media/CSC212-Final-Project-Demo.png" alt="image" style="zoom:20%;" />
 
-## Demonstration
+### Demonstration
 Click below to watch a demonstration video for running our command line application.
 
 [![Application Demonstration](./media/video-thumbnail.png)](https://youtu.be/v1EXNSsBulI)
