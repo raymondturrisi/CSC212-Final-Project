@@ -829,7 +829,6 @@ template <typename t>
 t KDTree<t>::nearest_neighbor_best(t data) {
     double best_dist = DBL_MAXT; // << literally the worst case
     t result(this->dimensions);
-    double best_dist = DBL_MAXT; // << literally the worst case
     nearest_neighbor_rbest(this->head, data, result, 0, best_dist);
     return result;
 }
