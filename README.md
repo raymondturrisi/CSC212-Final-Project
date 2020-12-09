@@ -39,6 +39,10 @@ Welcome to the GitHub for our CSC 212 Final Project. Here we will provide a brie
 3. App 3
 ~~~
 
+### Using our code
+
+[![Application Demonstration](https://img.youtu.be/v1EXNSsBulI)](https://youtu.be/v1EXNSsBulI)
+
 ### Introduction to KD Trees
 The K-D tree is a multidimensional BST which was first created in 1975
 by Dr. Jon Louis Bentley, a current professor at Carnegie Mellon
